@@ -8,7 +8,7 @@ PROJECT="$2"
 echo "Importing..."
 qiime tools import \
   --type EMPPairedEndSequences \
-  --input-path /staging/${NETID}/${PROJECT}/input_outputs/00_pipeline_inputs/seqs-2 \
+  --input-path /staging/${NETID}/${PROJECT}/00_pipeline_inputs/seqs \
   --output-path original_demux.qza
 
 echo "Demultiplexing..."

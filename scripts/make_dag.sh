@@ -13,11 +13,12 @@ help_message() {
     echo "  -n    (required) NetID: Your UW Madison netid. Example: bbadger"
     echo "  -g    (required) Group: Group for the diversity plots, must be a column name in sample-metadata.tsv. Example: vegetation"
     echo "  -p    (required) ProjectName: The project subfolder name. Example: test_project"
+    echo "  -r   (required) Reference database: Target reference database for taxonomy. Example: silva-full"
     echo "  -o    (required) DAG output file name: Desired name for DAG file. Example: test_project"
-    
+
 	echo
-	echo "Example usage: bash make_dag.sh -d TRUE -n bbadger -g vegetation -p test_project -o test_project_true"
-	echo "Example usage: bash make_dag.sh -d FALSE -n bbadger -g vegetation -p test_project -o test_project_false"
+	echo "Example usage: bash make_dag.sh -d TRUE -n bbadger -g vegetation -p test_project -r silva-full -o test_project_true"
+	echo "Example usage: bash make_dag.sh -d FALSE -n bbadger -g vegetation -p test_project -r silva-full -o test_project_false"
 	exit 1
 }
 
@@ -26,22 +27,24 @@ DEMUX=""
 NETID=""
 GROUP=""
 PROJECT=""
+DATABASE=""
 FILENAME=""
 
 # Parse flags
-while getopts "d:n:g:p:o:" flag; do
+while getopts "d:n:g:p:r:o:" flag; do
     case "${flag}" in
         d) DEMUX=${OPTARG} ;;
 		n) NETID=${OPTARG} ;;
         g) GROUP=${OPTARG} ;;
         p) PROJECT=${OPTARG} ;;
+        r) DATABASE=${OPTARG} ;;
         o) FILENAME=${OPTARG} ;;
         *) help_message ;;
     esac
 done
 
 # Check that all required inputs are provided
-if [[ -z "$DEMUX" || -z "$NETID" || -z "$GROUP" || -z "$PROJECT" || -z "$FILENAME" ]]; then
+if [[ -z "$DEMUX" || -z "$NETID" || -z "$GROUP" || -z "$PROJECT" || -z "$DATABASE" || -z "$FILENAME" ]]; then
 	echo "Please check that you have provided all required inputs."
 	help_message
 	exit 1
@@ -67,7 +70,7 @@ if [ "$DEMUX" = "TRUE" ]; then
 	echo "JOB RAREFACTION 06_rarefact.sub" >> "$FILENAME.dag"
 	echo "VARS RAREFACTION netid=\"$NETID\" project=\"$PROJECT\"" >> "$FILENAME.dag"
 	echo "JOB TAXONOMY 07_taxonomy.sub" >> "$FILENAME.dag"
-	echo "VARS TAXONOMY netid=\"$NETID\" project=\"$PROJECT\"" >> "$FILENAME.dag"
+	echo "VARS TAXONOMY netid=\"$NETID\" project=\"$PROJECT\" db=\"$DATABASE\"" >> "$FILENAME.dag"
 	echo "JOB ANCOMBC 08_ancombc.sub" >> "$FILENAME.dag"
 	echo "VARS ANCOMBC netid=\"$NETID\" project=\"$PROJECT\" column=\"$GROUP\"" >> "$FILENAME.dag"
 
@@ -93,7 +96,7 @@ elif [ "$DEMUX" = "FALSE" ]; then
 	echo "JOB RAREFACTION 06_rarefact.sub" >> "$FILENAME.dag"
 	echo "VARS RAREFACTION netid=\"$NETID\" project=\"$PROJECT\"" >> "$FILENAME.dag"
 	echo "JOB TAXONOMY 07_taxonomy.sub" >> "$FILENAME.dag"
-	echo "VARS TAXONOMY netid=\"$NETID\" project=\"$PROJECT\"" >> "$FILENAME.dag"
+	echo "VARS TAXONOMY netid=\"$NETID\" project=\"$PROJECT\" db=\"$DATABASE\"" >> "$FILENAME.dag"
 	echo "JOB ANCOMBC 08_ancombc.sub" >> "$FILENAME.dag"
 	echo "VARS ANCOMBC netid=\"$NETID\" project=\"$PROJECT\" column=\"$GROUP\"" >> "$FILENAME.dag"
 

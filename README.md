@@ -93,7 +93,7 @@ mkdir -p scripts/logs
  
 4. Run the helper script `00_mkdir.sh` from your 16S_microbiome_wf/scripts directory. 
 This will create the directory within your staging folder that is necessary to handle all file inputs and outputs. To run, type: ``` bash 00_mkdir.sh ```
-The script takes 2 arguments: your netid, and the name of a folder that will be created. In this example, the folder will be named `test_project`
+The script takes 2 arguments: your netid, and the name of a folder that will be created. In this example, the folder will be named `my_project`
 ```
 cd scripts
 # change this for your netid
@@ -103,7 +103,7 @@ bash 00_mkdir.sh $NETID $PROJECT
 ```
 
 5. Run `make_dag.sh` from your scripts directory to create a DAG workflow. 
-Be sure to include the four neccessary arguments for it to work. 
+Be sure to include the six neccessary arguments for it to work. 
 
 Help page:
 ```
@@ -118,11 +118,12 @@ Options:
   -d    (required) Demux: Whether you need to demultiplex your data. Use TRUE if you want to demultiplex the data, and FALSE if you have already demultipldex data. Example: TRUE
   -n    (required) NetID: Your UW Madison netid. Example: bbadger
   -g    (required) Group: Group for the diversity plots, must be a column name in sample-metadata.tsv. Example: vegetation
-  -p    (required) ProjectName: The project subfolder name. Example: test_project
+  -p    (required) ProjectName: The project subfolder name. Example: my_project
+  -r    (required) Reference database: Target reference database for taxonomy. Example: silva-full
   -o    (required) DAG output file name: Desired name for DAG file. Example: test_project
 
-Example usage: bash make_dag.sh -d TRUE -n bbadger -g vegetation -p test_project -o test_project_true
-Example usage: bash make_dag.sh -d FALSE -n bbadger -g vegetation -p test_project -o test_project_false
+Example usage: bash make_dag.sh -d TRUE -n bbadger -g vegetation -p my_project -r silva-full -o test_project_true
+Example usage: bash make_dag.sh -d FALSE -n bbadger -g vegetation -p my_project -r silva-full -o test_project_false
 ```
 
 This will create a file named `test_project_true.dag` or `test_project_false.dag`
@@ -132,23 +133,26 @@ This will create a file named `test_project_true.dag` or `test_project_false.dag
 > This will be fixed in future iterations.
 > For a temporary fix, you could also renamed your columns in your sample-metadata.tsv file such as there are no dashes (e.g transect-name would be TransectName) and use that as the group name when using `00_mkdir.sh`
 
+>[!NOTE]
+>Check out all options for reference databases in the customization part below.
+
 6. Confirm that you have:
-- A) the proper staging folder structure (path: `/staging/username/project/input_outputs/all job names 00-08`) 
+- A) the proper staging folder structure (path: `/staging/username/project/all job names 00-08`) 
 - B) a DAG with your desired name in your scripts folder.
 
-7. Import your input data (paired-end fastq files, and `sample-metadata.tsv` file) into your `/staging/username/project/input_outputs/00_pipeline_inputs` directory.
+7. Import your input data (paired-end fastq files, and `sample-metadata.tsv` file) into your `/staging/username/project/00_pipeline_inputs` directory.
 
 To transfer files from your laptop to CHTC you can do the following:
 Open a new terminal window
 From your laptop navigate to where the FASTQ files are located
 ```
 cd Downloads
-scp -r ~/Downloads/seqs netid@ap2002.chtc.wisc.edu:/staging/netid/project/input_ouputs/00_pipeline_inputs
+scp -r ~/Downloads/seqs netid@ap2002.chtc.wisc.edu:/staging/netid/project/00_pipeline_inputs
 ```
 
 Do the same thing to transfer the `sample-metadata.tsv` file to the sample folder:
 ```
-scp -r ~/Downloads/sample-metadata.tsv netid@ap2002.chtc.wisc.edu:/staging/netid/project/input_ouputs/00_pipeline_inputs
+scp -r ~/Downloads/sample-metadata.tsv netid@ap2002.chtc.wisc.edu:/staging/netid/project/00_pipeline_inputs
 ```
 
 The `scp` command takes two arguments. The first one (`~/Downloads/seqs`) is the folder you want to transfer over, and the second argument takes the form of the `sshaddress:path to where you want to put it`
@@ -158,8 +162,8 @@ The `scp` command takes two arguments. The first one (`~/Downloads/seqs`) is the
 
 8. Switch terminal windows and check that the files are transferred correctly.
 ```
-ls /staging/netid/project/input_ouputs/00_pipeline_inputs/seqs
-ls /staging/netid/project/input_outputs/00_pipeline_inputs/
+ls /staging/netid/project/00_pipeline_inputs/seqs
+ls /staging/netid/project/00_pipeline_inputs/
 ```
 
 you should be able to see all your paired FASTQ files - if not, try to troubleshoot the `scp` command or ask for help.
@@ -180,12 +184,12 @@ At this point, you can log out of chtc, the job will still be running.
 Just log back in later to see the job progress by typing condor_q again.
 
 > [!TIP]
-> If after typing `condor_q` you notice that one of your jobs went on hold, you can try to identify the reason by typing `condor_q -hold jobID`, where jobID is the number in the last column of the terminal printout for condor_q.
+> If after typing `condor_q` you notice that one of your jobs went on hold, you can try to identify the reason by typing `condor_q -hold` or `condor_q -hold jobID`, where jobID is the number in the last column of the terminal printout for condor_q.
 > Carefully read the message, and it might tell you that there was an issue during file transfer input or output. Common mistakes are incorrect file naming, in which case you will see something like "file not found". Carefully read that the path of the file it is trying to transfer is correct and exists.
 
-11. The result for each job should appear within its respective output file within the `/staging/$NETID/$PROJECT/input_outputs` directory.
+11. The result for each job should appear within its respective output file within the `/staging/$NETID/$PROJECT` directory.
 
-12. Transfer your files from CHTC to your computer once the job is correctly completed. One recommended way to do this is the following:
+12. Transfer your files from CHTC to your computer once the job is correctly completed. The `/staging` folder is intended for short-term storage of large files, but it does not guarantee long-term backup or permanence. Files may be automatically deleted after a certain period of time. Additionally, you should transfer your output files before submitting your next DAGMan workflow, because by default the workflow will generate output files with the same names. If the files remain in staging, they will be overwritten by the new run unless you manually rename them or follow the same procedure to make a new `.dag` file with a new `project` folder name. One recommended way to transfer files to local is shown below:
 
 To do so, open a new Terminal window.
 
@@ -198,7 +202,7 @@ cd my_chtc_results
 
 ```
 sftp netid@ap2002.cthc.wisc.edu
-cd /staging/username/project/input_outputs
+cd /staging/username/project
 get -r *
 exit
 ```
@@ -210,7 +214,7 @@ cd ~/Downloads
 mkdir -p my_chtc_results
 cd my_chtc_results
 # replace the netid and the file paths as appropriate, the ./ means transfer these files to the current directory, which would be my_chtc_results in this case 
-scp -r bbadger@ap2002.chtc.wisc.edu:/staging/bbadger/project/input_outputs ./
+scp -r bbadger@ap2002.chtc.wisc.edu:/staging/bbadger/project ./
 ```
 
 # Next steps
@@ -245,23 +249,34 @@ Go to Interactive Sample Details and play around with the slider to see how incr
 
 Edit the line `--p-sampling-depth` of the script `05_abdiv.sh` according to what you see in output file 
 
-## Changing the taxonomic database
+## Taxonomy
 `07-taxonomy/taxa-bar-plot.qzv` in qiime2 view: it doesn't look like much at first, but use the drop-down menu to select another taxonomic level (level 1 = kingdom, 2 = phylum, 3=class, 4=order, 5=family, 6=genus), different color palettes, samples, etc. You can even change the color paletter.
 
-Currently, the `07_taxonomy.sh` script uses the GreenGenes database. Other common ones are Silva.
-If you want to use the Silva Database instead, modify the `wget` command of script `07_taxonomy.sh` to:
+### Change a taxonomy classifier
+This workflow supports multiple pre-trained classifiers for taxonomic assignment. The choice of classifier depends on your research goals and sample type.
 
-Before (using greengenes, default)
-```
-wget -O 'gg-13-8-99-515-806-nb-classifier.qza' \
-  'https://moving-pictures-tutorial.readthedocs.io/en/latest/data/moving-pictures/gg-13-8-99-515-806-nb-classifier.qza'
+#### SILVA
+- **What it is**: A large and widely used database of *16S rRNA gene sequences* from bacteria and archaea.  
+- **Options**:  
+  - `silva-full`: Full-length 16S reference sequences (most comprehensive, highest resource usage).  
+  - `silva-diverse`: Weighted classifier trained on diverse environments (balances accuracy and efficiency).  
+  - `silva-stool`: Weighted classifier trained on human stool microbiomes (optimized for gut studies).  
+- **Notes**: Considered the "gold standard" for 16S classification. Very large, which can require high memory during classification.  
 
-```
+#### GTDB (Genome Taxonomy Database)  
+- **What it is**: Genome-based taxonomy built from thousands of bacterial and archaeal genomes.  
+- **Options**:  
+  - `gtdb-full`: Full-length reference database.  
+  - `gtdb-diverse`: Weighted classifier for diverse sample types.  
+  - `gtdb-stool`: Weighted classifier optimized for human stool samples.  
+- **Notes**: Incorporates whole-genome information, not just 16S. Useful for metagenomic datasets or when genomic resolution is important. Larger than Silva, and still growing rapidly.  
 
-After (using Silva):
-```
-Information to come.
-```
+####  Greengenes2 (GG2)  
+- **What it is**: An updated version of the older Greengenes 16S rRNA reference database.  
+- **Options**:  
+  - `gg2-full`: Full-length 16S reference classifier.  
+  - `gg2-525f`: V4 region (515F/806R primers) classifier, optimized for that commonly sequenced amplicon.  
+- **Notes**: Historically popular but smaller than Silva. GG2 is a refreshed release (2024+), but Silva is generally more comprehensive. GG2 classifiers may be faster and lighter to run.  
 
 ## Resubmit the DAG
 Once you have modified these values for something customized to your study, rerun the dag, by making a copy of your dag workflow first (e.g. `test_project_dag.dag`)

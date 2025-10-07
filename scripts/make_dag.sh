@@ -5,7 +5,7 @@ help_message() {
     echo "HELP PAGE..."
 	echo
 	echo
-    echo "Syntax: bash make_dag.sh -d <TRUE|FALSE> -n <netid> -g <group> -p <project> -o <output filename>"
+    echo "Syntax: bash make_dag.sh -d <TRUE|FALSE> -n <netid> -g <group> -p <project> -r <SILVA|etc.> -o <output filename>"
 	echo "These arguments can be provided in any order, but all arguments are required. Options are case-sensitive."
     echo
     echo "Options:"

@@ -3,11 +3,10 @@ remote_theme: just-the-docs/just-the-docs
 color_scheme: light
 nav_sort: case_insensitive
 search_enabled: true
+exclude:
+  - README.md
 aux_links:
   "GitHub Repository":
     - "//github.com/UW-Madison-Bacteriology-Bioinformatics/16S_microbiome_wf"
 
 nav_enabled: true
-
-exclude:
-  - README.md

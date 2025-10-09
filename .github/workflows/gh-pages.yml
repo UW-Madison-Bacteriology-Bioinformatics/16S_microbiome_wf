@@ -6,7 +6,13 @@ on:
       - Jenifer
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -17,14 +23,23 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.1'
-      - name: Install dependencies
+      - name: Install Jekyll
         run: |
-          gem install bundler jekyll
-          bundle add just-the-docs
+          gem install jekyll just-the-docs
       - name: Build site
-        run: bundle exec jekyll build
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        run: jekyll build 
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./_site
+          path: ./_site
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

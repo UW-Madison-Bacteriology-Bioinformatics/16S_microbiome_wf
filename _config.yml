@@ -8,3 +8,6 @@ aux_links:
     - "//github.com/UW-Madison-Bacteriology-Bioinformatics/16S_microbiome_wf"
 
 nav_enabled: true
+
+exclude:
+  - README.md

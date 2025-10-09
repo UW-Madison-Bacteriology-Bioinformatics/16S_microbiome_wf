@@ -17,3 +17,8 @@ This guide walks you through the setup, execution, and customization of your wor
 
 ## Diagram with steps of pipeline
 ![diagram of 16S workflow DAG](figure_16S_wf.png)
+
+## Special Considerations
+* Do not include any personal information in the data input into the pipeline.
+* Please set up a staging folder with CHTC before trying this pipeline. It is meant to process large amounts of data that your home directory may not neccessarily be able to manage.
+

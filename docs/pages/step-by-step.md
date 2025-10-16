@@ -5,7 +5,6 @@ nav_order: 2
 ---
 
 # Workflow
-
 ## Description of files in this repository:
 
 * `README.md`: These directions
@@ -18,17 +17,17 @@ nav_order: 2
 
 ## Before starting
 
+**CHTC account setup**
+
 You will first need access to a `/staging/netid` folder. For more information about /staging folders, please visit: https://chtc.cs.wisc.edu/uw-research-computing/file-avail-largedata . The /staging folder will be used for the large genomic input files, and the large genomic output files.
 
 In your request, please consider your input files (how many samples will you have, have the size of all your reads and assembled data, as well as your output files).
 
-📂 **Input files needed**
-
 **Demultiplied or not?**
 
-1. You will need **paired-end reads** (Illumina) corresponding to the 16S rRNA gene amplicons.
+You will need **paired-end reads** (Illumina) corresponding to the 16S rRNA gene amplicons.
 
-**1.1. Already demultiplexed:**
+- Already demultiplexed:
 
 Most of the time, sequencing centers will give you this data already **demultiplexed**, meaning that you will get 2 files per samples, labelled like this: `{sample}_R1_001.fastq.gz` and `{sample}_R2_001.fastq.gz`.
 
@@ -40,7 +39,7 @@ Organize them like this:
  ```
 
 
- **1.2 Not already demultiplexed**:
+- Not already demultiplexed:
 
 If the data is not already demultiplexed, you should find a forward reads fastq file, a reverse reads fastq file, and a file with barcodes associated with each sample. 
 
@@ -57,12 +56,11 @@ If you just have fastq files, you can "zip" them into the gz file format by typi
 gzip forward.fastq
 ```
 
+**Sample information**
+You will need a **tab-separated table** named exactly `sample_metadata.tsv`, (tsv = tab separated values). The file should contain information about the samples, such as sample characteristics. A TSV file is a text file that can be opened with any regular text editor or spreasheet program. The column names for the sample characteristics should not container any special characters, including dashes. For example, if you have a column named `transect-sites` rename it as `transectSite` (or something without dashes), and save the file again.
 
-  
-2. You will need a **tab-separated table** named exactly `sample_metadata.tsv`, (tsv = tab separated values). The file should contain information about the samples, such as sample characteristics. A TSV file is a text file that can be opened with any regular text editor or spreasheet program. The column names for the sample characteristics should not container any special characters, including dashes. For example, if you have a column named `transect-sites` rename it as `transectSite` (or something without dashes), and save the file again.
-
->[!NOTE]
->For your reference, [here](https://drive.google.com/drive/folders/1qCO_ztaghJvXEnkwRji8tGCH98csbijj?usp=sharing) is an example of what the input folder should look like.
+{: .note }
+> For your reference, [here](https://drive.google.com/drive/folders/1qCO_ztaghJvXEnkwRji8tGCH98csbijj?usp=sharing) is an example of what the input folder should look like.
 
 ## Steps
 
@@ -99,7 +97,7 @@ bash 00_mkdir.sh $NETID $PROJECT
 5. Run `make_dag.sh` from your scripts directory to create a DAG workflow. 
 Be sure to include the six neccessary arguments for it to work.
 
-Help page:
+	Help page:
 ```
 make_dag.sh: illegal option -- h
 HELP PAGE...
@@ -120,39 +118,39 @@ Example usage: bash make_dag.sh -d TRUE -n bbadger -g vegetation -p my_project -
 Example usage: bash make_dag.sh -d FALSE -n bbadger -g vegetation -p my_project -r silva-full -o test_project_false
 ```
 
-This will create a file named `test_project_true.dag` or `test_project_false.dag`
+	This will create a file named `test_project_true.dag` or `test_project_false.dag`
 
->[!NOTE]
+{: .note }
 > 07/15: For now, the group (`-g`) must be a categorical variable without any special characters. For example transect-name will not work because of the dash, but the group vegetation will. See Input Files above.
 > This will be fixed in future iterations.
 > For a temporary fix, you could also renamed your columns in your sample-metadata.tsv file such as there are no dashes (e.g transect-name would be TransectName) and use that as the group name when using `00_mkdir.sh`
 
->[!NOTE]
->Check out all options for reference databases in the customization part below.
+{: .note }
+> Check out all options for reference databases in the customization part below.
 
 6. Confirm that you have:
-- A) the proper staging folder structure (path: `/staging/username/project/all job names 00-08`) 
-- B) a DAG with your desired name in your scripts folder.
+	- A) the proper staging folder structure (path: `/staging/username/project/all job names 00-08`) 
+	- B) a DAG with your desired name in your scripts folder.
 
 7. Import your input data (paired-end fastq files, and `sample-metadata.tsv` file) into your `/staging/username/project/00_pipeline_inputs` directory.
 
-To transfer files from your laptop to CHTC you can do the following:
-Open a new terminal window
-From your laptop navigate to where the FASTQ files are located
+	To transfer files from your laptop to CHTC you can do the following:
+	- Open a new terminal window
+	- From your laptop navigate to where the FASTQ files are located
 ```
 cd Downloads
 scp -r ~/Downloads/seqs netid@ap2002.chtc.wisc.edu:/staging/netid/project/00_pipeline_inputs
 ```
 
-Do the same thing to transfer the `sample-metadata.tsv` file to the sample folder:
+	Do the same thing to transfer the `sample-metadata.tsv` file to the sample folder:
 ```
 scp -r ~/Downloads/sample-metadata.tsv netid@ap2002.chtc.wisc.edu:/staging/netid/project/00_pipeline_inputs
 ```
 
-The `scp` command takes two arguments. The first one (`~/Downloads/seqs`) is the folder you want to transfer over, and the second argument takes the form of the `sshaddress:path to where you want to put it`
+	The `scp` command takes two arguments. The first one (`~/Downloads/seqs`) is the folder you want to transfer over, and the second argument takes the form of the `sshaddress:path to where you want to put it`
 
->[!NOTE]
->For your reference, [here](https://drive.google.com/drive/folders/1qCO_ztaghJvXEnkwRji8tGCH98csbijj?usp=sharing) is an example of what the input  `00_pipeline_inputs` folder should look like.
+{: .note }
+For your reference, [here](https://drive.google.com/drive/folders/1qCO_ztaghJvXEnkwRji8tGCH98csbijj?usp=sharing) is an example of what the input  `00_pipeline_inputs` folder should look like.
 
 8. Switch terminal windows and check that the files are transferred correctly.
 ```
@@ -160,7 +158,7 @@ ls /staging/netid/project/00_pipeline_inputs/seqs
 ls /staging/netid/project/00_pipeline_inputs/
 ```
 
-you should be able to see all your paired FASTQ files - if not, try to troubleshoot the `scp` command or ask for help.
+	You should be able to see all your paired FASTQ files - if not, try to troubleshoot the `scp` command or ask for help.
 
 9. Navigate back to your `/home/username/16S_microbiome_wf/scripts` folder, and from there submit the dag.
 
@@ -174,10 +172,10 @@ condor_submit_dag test_project_dag.dag
 condor_q
 ```
 
-At this point, you can log out of chtc, the job will still be running.
-Just log back in later to see the job progress by typing condor_q again.
+	At this point, you can log out of chtc, the job will still be running.
+	Just log back in later to see the job progress by typing condor_q again.
 
-> [!TIP]
+{: .tip }
 > If after typing `condor_q` you notice that one of your jobs went on hold, you can try to identify the reason by typing `condor_q -hold` or `condor_q -hold jobID`, where jobID is the number in the last column of the terminal printout for condor_q.
 > Carefully read the message, and it might tell you that there was an issue during file transfer input or output. Common mistakes are incorrect file naming, in which case you will see something like "file not found". Carefully read that the path of the file it is trying to transfer is correct and exists.
 
@@ -185,9 +183,10 @@ Just log back in later to see the job progress by typing condor_q again.
 
 12. Transfer your files from CHTC to your computer once the job is correctly completed. The `/staging` folder is intended for short-term storage of large files, but it does not guarantee long-term backup or permanence. Files may be automatically deleted after a certain period of time. Additionally, you should transfer your output files before submitting your next DAGMan workflow, because by default the workflow will generate output files with the same names. If the files remain in staging, they will be overwritten by the new run unless you manually rename them or follow the same procedure to make a new `.dag` file with a new `project` folder name. One recommended way to transfer files to local is shown below:
 
-To do so, open a new Terminal window.
+	To do so, open a new Terminal window.
 
-In terminal, navigate to the location you want the files to go on your device:
+	In terminal, navigate to the location you want the files to go on your device:
+
 ```
 cd ~/Downloads
 mkdir -p my_chtc_results
@@ -201,7 +200,7 @@ get -r *
 exit
 ```
 
-**Another** method to transfer the outputs files are:
+	**Another** method to transfer the outputs files are:
 ```
 # Make the output folders wherever you want:
 cd ~/Downloads

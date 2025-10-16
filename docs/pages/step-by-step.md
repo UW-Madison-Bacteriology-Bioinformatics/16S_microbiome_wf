@@ -19,11 +19,11 @@ nav_order: 2
 
 **CHTC account setup**
 
-You will first need access to a `/staging/netid` folder. For more information about /staging folders, please visit: https://chtc.cs.wisc.edu/uw-research-computing/file-avail-largedata . The /staging folder will be used for the large genomic input files, and the large genomic output files.
+You will first need access to a `/staging/netid` folder. For more information about `/staging` folders, please visit: https://chtc.cs.wisc.edu/uw-research-computing/file-avail-largedata . The `/staging` folder will be used for the large genomic input files, and the large genomic output files.
 
 In your request, please consider your input files (how many samples will you have, have the size of all your reads and assembled data, as well as your output files).
 
-**Demultiplied or not?**
+**Demultiplexed or not?**
 
 You will need **paired-end reads** (Illumina) corresponding to the 16S rRNA gene amplicons.
 
@@ -123,7 +123,7 @@ This will create a file named `test_project_true.dag` or `test_project_false.dag
 {: .note }
 > 07/15: For now, the group (`-g`) must be a categorical variable without any special characters. For example transect-name will not work because of the dash, but the group vegetation will. See Input Files above.
 > This will be fixed in future iterations.
-> For a temporary fix, you could also renamed your columns in your sample-metadata.tsv file such as there are no dashes (e.g transect-name would be TransectName) and use that as the group name when using `00_mkdir.sh`
+> For a temporary fix, you could also renamed your columns in your sample-metadata.tsv file such as there are no dashes (e.g transect-name would be TransectName) and use that as the group name when using `make_dag.sh`
 
 {: .note }
 > Check out all options for reference databases in the customization part below.
@@ -225,5 +225,5 @@ scp -r bbadger@ap2002.chtc.wisc.edu:/staging/bbadger/project ./
 
 The `.qza` (artefacts) and `qzv` (vizualisations) can be opened using the Qiime2 View website (https://view.qiime2.org/). 
 From your laptop, where you downloaded your CHTC results files, drag and drop them onto the qiime2 View website to view the plots, tables, etc.
-The `qza` files are actually zipped files, so you can also unzip them like a regular .zip file.
+The `qza` files are actually zipped files, so you can also unzip them like a regular `.zip` file.
 

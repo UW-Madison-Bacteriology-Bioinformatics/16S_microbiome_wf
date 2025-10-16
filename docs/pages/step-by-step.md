@@ -111,7 +111,7 @@ Options:
   -n    (required) NetID: Your UW Madison netid. Example: bbadger
   -g    (required) Group: Group for the diversity plots, must be a column name in sample-metadata.tsv. Example: vegetation
   -p    (required) ProjectName: The project subfolder name. Example: my_project
-  -r    (required) Reference database: Target reference database for taxonomy. Example: silva-full
+  -r    (required) Reference database: Target reference database for taxonomy. Options: silva-full, silva-diverse, silva-stool, gtdb-full, gtdb-diverse, gtdb-stool, gg2-full, gg2-525f. Example: silva-full
   -o    (required) DAG output file name: Desired name for DAG file. Example: test_project
 
 Example usage: bash make_dag.sh -d TRUE -n bbadger -g vegetation -p my_project -r silva-full -o test_project_true

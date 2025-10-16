@@ -66,7 +66,7 @@ gzip forward.fastq
 
 
   
-2. You will need a **tab-separated table** named exactly `sample_metadata.tsv`, (tsv = tab separated values). The file should contain information about the samples, such as sample characteristics. A TSV file is a text file that can be opened with any regular text editor or spreasheet program. The column names for the sample characteristics should not container any special characters, including dashes. For example, if you have a column named `transect-sites` rename it as `transectSite` (or something without dashes), and save the file again.
+2. You will need a **tab-separated table** named exactly `sample-metadata.tsv`, (tsv = tab separated values). The file should contain information about the samples, such as sample characteristics. A TSV file is a text file that can be opened with any regular text editor or spreasheet program. The column names for the sample characteristics should not container any special characters, including dashes. For example, if you have a column named `transect-sites` rename it as `transectSite` (or something without dashes), and save the file again.
 
 >[!NOTE]
 >For your reference, [here](https://drive.google.com/drive/folders/1qCO_ztaghJvXEnkwRji8tGCH98csbijj?usp=sharing) is an example of what the input folder should look like.
@@ -119,7 +119,7 @@ Options:
   -n    (required) NetID: Your UW Madison netid. Example: bbadger
   -g    (required) Group: Group for the diversity plots, must be a column name in sample-metadata.tsv. Example: vegetation
   -p    (required) ProjectName: The project subfolder name. Example: my_project
-  -r    (required) Reference database: Target reference database for taxonomy. Example: silva-full
+  -r    (required) Reference database: Target reference database for taxonomy. Options: silva-full, silva-diverse, silva-stool, gtdb-full, gtdb-diverse, gtdb-stool, gg2-full, gg2-525f. Example: silva-full
   -o    (required) DAG output file name: Desired name for DAG file. Example: test_project
 
 Example usage: bash make_dag.sh -d TRUE -n bbadger -g vegetation -p my_project -r silva-full -o test_project_true

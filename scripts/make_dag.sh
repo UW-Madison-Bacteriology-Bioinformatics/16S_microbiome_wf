@@ -13,7 +13,7 @@ help_message() {
     echo "  -n    (required) NetID: Your UW Madison netid. Example: bbadger"
     echo "  -g    (required) Group: Group for the diversity plots, must be a column name in sample-metadata.tsv. Example: vegetation"
     echo "  -p    (required) ProjectName: The project subfolder name. Example: test_project"
-    echo "  -r   (required) Reference database: Target reference database for taxonomy. Example: silva-full"
+    echo "  -r   (required) Reference database: Target reference database for taxonomy. Options: silva-full, silva-diverse, silva-stool, gtbd-full, gtdb-diverse, gtdb-stool, gg2-full, gg2-525f. Example: silva-full"
     echo "  -o    (required) DAG output file name: Desired name for DAG file. Example: test_project"
 
 	echo

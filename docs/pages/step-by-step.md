@@ -128,6 +128,8 @@ This will create a file named `test_project_true.dag` or `test_project_false.dag
 {: .note }
 > Check out all options for reference databases in the customization part below.
 
+{:style="counter-reset:none"}
+
 6. Confirm that you have:
 	- A) the proper staging folder structure (path: `/staging/username/project/all job names 00-08`) 
 	- B) a DAG with your desired name in your scripts folder.
@@ -152,6 +154,8 @@ The `scp` command takes two arguments. The first one (`~/Downloads/seqs`) is the
 {: .note }
 For your reference, [here](https://drive.google.com/drive/folders/1qCO_ztaghJvXEnkwRji8tGCH98csbijj?usp=sharing) is an example of what the input  `00_pipeline_inputs` folder should look like.
 
+{:style="counter-reset:none"}
+
 8. Switch terminal windows and check that the files are transferred correctly.
 ```
 ls /staging/netid/project/00_pipeline_inputs/seqs
@@ -160,6 +164,8 @@ ls /staging/netid/project/00_pipeline_inputs/
 
 You should be able to see all your paired FASTQ files - if not, try to troubleshoot the `scp` command or ask for help.
 
+{:style="counter-reset:none"}
+
 9. Navigate back to your `/home/username/16S_microbiome_wf/scripts` folder, and from there submit the dag.
 
 ```
@@ -167,7 +173,10 @@ cd ~/16S_microbiome_wf/scripts
 condor_submit_dag test_project_dag.dag
 ```
 
+{:style="counter-reset:none"}
+
 10. Check your DAG's status with:
+
 ```
 condor_q
 ```
@@ -178,6 +187,8 @@ Just log back in later to see the job progress by typing condor_q again.
 {: .tip }
 > If after typing `condor_q` you notice that one of your jobs went on hold, you can try to identify the reason by typing `condor_q -hold` or `condor_q -hold jobID`, where jobID is the number in the last column of the terminal printout for condor_q.
 > Carefully read the message, and it might tell you that there was an issue during file transfer input or output. Common mistakes are incorrect file naming, in which case you will see something like "file not found". Carefully read that the path of the file it is trying to transfer is correct and exists.
+
+{:style="counter-reset:none"}
 
 11. The result for each job should appear within its respective output file within the `/staging/$NETID/$PROJECT` directory.
 

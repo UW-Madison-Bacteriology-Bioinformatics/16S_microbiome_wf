@@ -6,7 +6,7 @@ nav_order: 4
 
 # References
 If you find this pipeline helpful, please cite this GitHub Repository:
-1. Tran, P. Q., Michaelis, M. L. (2025). 16S rRNA-seq (Version 0.1) ([link](https://github.com/UW-Madison-Bacteriology-Bioinformatics/16S_microbiome_wf.git))
+1. Tran, P. Q., Michaelis, M. L., Qin, J.(2025). 16S rRNA gene pipeline. ([link](https://github.com/UW-Madison-Bacteriology-Bioinformatics/16S_microbiome_wf.git))
 
 This workflow relies on the following softwares, please cite them as well:
  

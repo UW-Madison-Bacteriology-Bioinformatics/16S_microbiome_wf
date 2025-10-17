@@ -23,4 +23,4 @@ mkdir -p $staging/$project/06_rarefact/
 mkdir -p $staging/$project/07_taxonomy/
 mkdir -p $staging/$project/08_ancombc/
 
-echo "Created folder structure for 16S rRNA pipeline"
+echo "Created folder structure for 16S rRNA pipeline at $staging/$project"

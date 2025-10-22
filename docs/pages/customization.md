@@ -62,11 +62,12 @@ This workflow supports multiple pre-trained classifiers for taxonomic assignment
 ## Adjusting Taxonomic Level in Differential Abundance (ANCOM-BC)
 This section explains how to modify the **taxonomic level** used in ANCOM-BC analysis. By default, the pipeline runs ANCOM-BC at **Level 6** (genus level), but you can easily change this to any desired taxonomic rank (e.g., Level 2 = phylum, Level 3 = class, Level 7 = species).
 
-1. Open the `08_ancombc.sh` script
+1. Open the `08_ancombc.sh` script.  
 ```
 nano 08_ancombc.sh
 ```
-2. Change the collapse level `p-level` to your desired level and rename the output file accordingly. For example, the code below set the level to 5 (family):
+
+2. Change the collapse level `p-level` to your desired level and rename the output file accordingly. For example, the code below set the level to 5 (family):  
 ```
 qiime taxa collapse \
   --i-table table.qza \
@@ -88,6 +89,7 @@ qiime composition da-barplot \
   --o-visualization level-5-da-barplot-${COLUMN}.qzv \
   --verbose
 ```
+
 3. Pressing `Ctrl + O`, `Enter`, then `Ctrl + X` to save and exit.
 
 

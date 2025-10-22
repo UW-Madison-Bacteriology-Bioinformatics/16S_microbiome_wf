@@ -30,13 +30,13 @@ For more details, refer to QIIME2’s official [tutorial](https://amplicon-docs.
 **Files:** `demux.qzv`  
 **Purpose:** Provides basic statistics and quality information about your raw input reads.  
 
-**Interpretation:**
--  **Sequence count summary:** Check the number of forward and reverse reads for each sample.  
+- **Sequence count summary:** Check the number of forward and reverse reads for each sample.  
   - The counts should roughly match.  
   - Large mismatches may indicate pairing or sequencing issues.  
--  **Interactive quality plot:** Displays the average quality score per base position.  
+
+- **Interactive quality plot:** Displays the average quality score per base position.  
   - Look for the position where the quality drops sharply.  
-  - This helps you decide your **trimming lengths** for DADA2.  
+  - This helps you decide your **trimming lengths** for DADA2.    
 
 ## Denoising
 
@@ -102,6 +102,7 @@ For more details, refer to QIIME2’s official [tutorial](https://amplicon-docs.
 ## Taxonomic Analysis
 
 **File:** `taxa-bar-plots.qzv`
+**Purpose:** Displays the taxonomic composition of samples at multiple classification levels.
 
 **Interpretation:**
 - Visualizes the relative abundance of taxa at different **taxonomic levels** (domain to species).  
@@ -116,6 +117,8 @@ For more details, refer to QIIME2’s official [tutorial](https://amplicon-docs.
 **Files:**
 - `da-barplot-vegetation.qzv`
 - `ancombc-level6.qzv`
+**Purpose:** Identifies taxa that are significantly different in abundance between experimental groups.
+
 
 **Interpretation:**
 - `da-barplot-vegetation.qzv`: Identifies which species are **over- or under-expressed** among groups (based on feature IDs only).  

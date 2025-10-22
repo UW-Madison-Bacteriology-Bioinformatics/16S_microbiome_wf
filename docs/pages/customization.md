@@ -36,7 +36,7 @@ Edit the line `--p-sampling-depth` of the script `05_abdiv.sh` according to what
 ### Change a taxonomy classifier
 This workflow supports multiple pre-trained classifiers for taxonomic assignment. The choice of classifier depends on your research goals and sample type.
 
-#### SILVA
+#### **SILVA**
 - **What it is**: A large and widely used database of *16S rRNA gene sequences* from bacteria and archaea.  
 - **Options**:  
   - `silva-full`: Full-length 16S reference sequences (most comprehensive, highest resource usage).  
@@ -44,7 +44,7 @@ This workflow supports multiple pre-trained classifiers for taxonomic assignment
   - `silva-stool`: Weighted classifier trained on human stool microbiomes (optimized for gut studies).  
 - **Notes**: Considered the "gold standard" for 16S classification. Very large, which can require high memory during classification.  
 
-#### GTDB (Genome Taxonomy Database)  
+#### **GTDB (Genome Taxonomy Database)**  
 - **What it is**: Genome-based taxonomy built from thousands of bacterial and archaeal genomes.  
 - **Options**:  
   - `gtdb-full`: Full-length reference database.  
@@ -52,7 +52,7 @@ This workflow supports multiple pre-trained classifiers for taxonomic assignment
   - `gtdb-stool`: Weighted classifier optimized for human stool samples.  
 - **Notes**: Incorporates whole-genome information, not just 16S. Useful for metagenomic datasets or when genomic resolution is important. Larger than Silva, and still growing rapidly.  
 
-####  Greengenes2 (GG2)  
+####  **Greengenes2 (GG2)**  
 - **What it is**: An updated version of the older Greengenes 16S rRNA reference database.  
 - **Options**:  
   - `gg2-full`: Full-length 16S reference classifier.  
@@ -75,14 +75,12 @@ qiime taxa collapse \
   --p-level 5 \
   --o-collapsed-table table-level-5.qza \
   --verbose
-
 qiime composition ancombc \
   --i-table table-level-5.qza \
   --m-metadata-file sample-metadata.tsv \
   --p-formula "$COLUMN" \
   --o-differentials level-5-ancombc-${COLUMN}.qza \
   --verbose
-
 qiime composition da-barplot \
   --i-data level-5-ancombc-${COLUMN}.qza \
   --p-significance-threshold 0.001 \

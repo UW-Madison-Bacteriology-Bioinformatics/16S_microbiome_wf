@@ -59,6 +59,38 @@ This workflow supports multiple pre-trained classifiers for taxonomic assignment
   - `gg2-525f`: V4 region (515F/806R primers) classifier, optimized for that commonly sequenced amplicon.  
 - **Notes**: Historically popular but smaller than Silva. GG2 is a refreshed release (2024+), but Silva is generally more comprehensive. GG2 classifiers may be faster and lighter to run.  
 
+## Adjusting Taxonomic Level in Differential Abundance (ANCOM-BC)
+This section explains how to modify the **taxonomic level** used in ANCOM-BC analysis. By default, the pipeline runs ANCOM-BC at **Level 6** (genus level), but you can easily change this to any desired taxonomic rank (e.g., Level 2 = phylum, Level 3 = class, Level 7 = species).
+
+1. Open the `08_ancombc.sh` script
+```
+nano 08_ancombc.sh
+```
+2. Change the collapse level `p-level` to your desired level and rename the output file accordingly. For example, the code below set the level to 5 (family):
+```
+qiime taxa collapse \
+  --i-table table.qza \
+  --i-taxonomy taxonomy.qza \
+  --p-level 5 \
+  --o-collapsed-table table-level-5.qza \
+  --verbose
+
+qiime composition ancombc \
+  --i-table table-level-5.qza \
+  --m-metadata-file sample-metadata.tsv \
+  --p-formula "$COLUMN" \
+  --o-differentials level-5-ancombc-${COLUMN}.qza \
+  --verbose
+
+qiime composition da-barplot \
+  --i-data level-5-ancombc-${COLUMN}.qza \
+  --p-significance-threshold 0.001 \
+  --o-visualization level-5-da-barplot-${COLUMN}.qzv \
+  --verbose
+```
+3. Pressing `Ctrl + O`, `Enter`, then `Ctrl + X` to save and exit.
+
+
 ## Resubmit the DAG
 Once you have modified these values for something customized to your study, rerun the dag, by making a copy of your dag workflow first (e.g. `test_project_dag.dag`)
 ```

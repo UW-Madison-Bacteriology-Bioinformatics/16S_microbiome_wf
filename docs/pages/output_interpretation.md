@@ -11,16 +11,32 @@ For the outputs of this pipeline (`.qza` and `.qzv` files), you should be able t
 {: .note }
 For more details, refer to QIIME2’s official [tutorial](https://amplicon-docs.qiime2.org/en/latest/). 
 
+## 🧾 Summary Table
+
+| Step | File(s) | Purpose | Key Insights |
+|------|----------|----------|---------------|
+| Demultiplexing | `demux.qzv` | Input stats & quality | Check read balance & trimming point |
+| Denoising | `stats.qzv` | Filter & denoise reads | Inspect % input passed filter |
+| Features | `rep-seqs.qzv`, `table.qzv` | Feature identity & abundance | Explore sequence richness |
+| Phylogenetic Tree | `rooted-tree.qza`, `tree.nwk` | Evolutionary relationships | Input for diversity analysis |
+| Alpha/Beta Diversity | `evenness.qzv`, `faith-pd.qzv`, `unweighted_unifrac.qzv` | Diversity comparisons | Compare diversity between groups |
+| Rarefaction | `alpha-rarefaction.qzv` | Sequencing depth evaluation | Check for plateau |
+| Taxonomy | `taxa-bar-plots.qzv` | Taxonomic composition | Examine dominant taxa |
+| ANCOM-BC | `da-barplot.qzv`, `ancombc-level6.qzv` | Differential abundance | Identify significant taxa |
+
+
 ## Demultiplexing
 
-**File:** `demux.qzv`  
+**Files:** `demux.qzv`  
 **Purpose:** Provides basic statistics and quality information about your raw input reads.  
 
 **Interpretation:**
--  **Sequence count summary:** Check the number of forward and reverse reads for each sample. The counts should roughly match: large mismatches may indicate pairing or sequencing issues.  
+-  **Sequence count summary:** Check the number of forward and reverse reads for each sample.  
+  - The counts should roughly match.  
+  - Large mismatches may indicate pairing or sequencing issues.  
 -  **Interactive quality plot:** Displays the average quality score per base position.  
-        - Look for the position where the quality drops sharply.  
-        - This helps you decide your **trimming lengths** for DADA2.  
+  - Look for the position where the quality drops sharply.  
+  - This helps you decide your **trimming lengths** for DADA2.  
 
 ## Denoising
 
@@ -37,6 +53,7 @@ For more details, refer to QIIME2’s official [tutorial](https://amplicon-docs.
 **Files:**  
 - `table.qzv`  
 - `rep-seqs.qzv`
+**Purpose:** Summarizes the abundance and identity of amplicon sequence variants (ASVs) in your dataset.
 
 **Interpretation:**  
 - `rep-seqs.qzv`: Shows representative sequences for each feature (ASV).  
@@ -49,13 +66,13 @@ For more details, refer to QIIME2’s official [tutorial](https://amplicon-docs.
 ## Phylogenetic Tree
 
 **Files:** `rooted-tree.qza`
+**Purpose:** Represents the evolutionary relationships among features (ASVs) for use in diversity analyses that require phylogenetic distances.
 
 **Interpretation:**  
 - The **rooted tree** provides phylogenetic relationships among features.  
 - You can download `tree.nwk` and visualize it in:  
-  - [iTOL](https://itol.embl.de) — upload `tree.nwk`
-  - R with `ggtree` package (`library(ggtree)`)
-- This tree is used for diversity analyses that require phylogenetic distance.
+  - [iTOL](https://itol.embl.de) — upload `tree.nwk`.  
+  - R with `ggtree` package (`library(ggtree)`). 
 
 ## Alpha & Beta Diversity
 
@@ -63,9 +80,10 @@ For more details, refer to QIIME2’s official [tutorial](https://amplicon-docs.
 - `evenness.qzv`
 - `faith-pd.qzv`
 - `unweighted_unifrac.qzv`
+**Purpose:** Quantifies and compares microbial diversity within and between samples.
 
 **Interpretation:**  
-- These three files have the same purpose of testing the diversity by comparing the difference between groups, but they use different statistic methods.  
+- These three files have the same function but use different statistic methods.  
 - `evenness.qzv`: Compares how evenly species are distributed across samples.  
   - Look for **p-values** comparing different groups.
 - `faith-pd.qzv`: Similar to evenness but uses **phylogenetic diversity** instead of counts.
@@ -103,4 +121,4 @@ For more details, refer to QIIME2’s official [tutorial](https://amplicon-docs.
 - `da-barplot-vegetation.qzv`: Identifies which species are **over- or under-expressed** among groups (based on feature IDs only).  
 - `ancombc-level6.qzv`: Displays **full taxonomic names** and significance results.  
   - Shows which taxa are **differentially abundant**.  
-  - You can customize by changing the taxonomic **level** parameter when running the pipeline.
+  - You can customize by changing the taxonomic **level** parameter when running the pipeline. Please check the customization page for the more detailed instruction on this step.

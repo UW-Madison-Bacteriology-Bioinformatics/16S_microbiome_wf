@@ -52,7 +52,7 @@ For more details, refer to QIIME2’s official [tutorial](https://amplicon-docs.
 
 **Files:**  
 - `table.qzv`  
-- `rep-seqs.qzv`
+- `rep-seqs.qzv`  
 **Purpose:** Summarizes the abundance and identity of amplicon sequence variants (ASVs) in your dataset.
 
 **Interpretation:**  
@@ -65,7 +65,7 @@ For more details, refer to QIIME2’s official [tutorial](https://amplicon-docs.
 
 ## Phylogenetic Tree
 
-**Files:** `rooted-tree.qza`
+**Files:** `rooted-tree.qza`  
 **Purpose:** Represents the evolutionary relationships among features (ASVs) for use in diversity analyses that require phylogenetic distances.
 
 **Interpretation:**  
@@ -79,7 +79,7 @@ For more details, refer to QIIME2’s official [tutorial](https://amplicon-docs.
 **Files:**
 - `evenness.qzv`
 - `faith-pd.qzv`
-- `unweighted_unifrac.qzv`
+- `unweighted_unifrac.qzv`  
 **Purpose:** Quantifies and compares microbial diversity within and between samples.
 
 **Interpretation:**  
@@ -101,7 +101,7 @@ For more details, refer to QIIME2’s official [tutorial](https://amplicon-docs.
 
 ## Taxonomic Analysis
 
-**File:** `taxa-bar-plots.qzv`
+**File:** `taxa-bar-plots.qzv`  
 **Purpose:** Displays the taxonomic composition of samples at multiple classification levels.
 
 **Interpretation:**
@@ -116,7 +116,7 @@ For more details, refer to QIIME2’s official [tutorial](https://amplicon-docs.
 
 **Files:**
 - `da-barplot-vegetation.qzv`
-- `ancombc-level6.qzv`
+- `ancombc-level6.qzv`  
 **Purpose:** Identifies taxa that are significantly different in abundance between experimental groups.
 
 

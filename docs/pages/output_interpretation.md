@@ -28,6 +28,7 @@ For more details, refer to QIIME2’s official [tutorial](https://amplicon-docs.
 ## Demultiplexing
 
 **Files:** `demux.qzv`  
+
 **Purpose:** Provides basic statistics and quality information about your raw input reads.  
 
 - **Sequence count summary:** Check the number of forward and reverse reads for each sample.  
@@ -41,6 +42,7 @@ For more details, refer to QIIME2’s official [tutorial](https://amplicon-docs.
 ## Denoising
 
 **Files:** `stats.qzv`  
+
 **Purpose:** Filter and denoise the raw reads, removing low-quality or chimeric sequences.
 
 **Interpretation:**  
@@ -53,6 +55,7 @@ For more details, refer to QIIME2’s official [tutorial](https://amplicon-docs.
 **Files:**  
 - `table.qzv`  
 - `rep-seqs.qzv`  
+
 **Purpose:** Summarizes the abundance and identity of amplicon sequence variants (ASVs) in your dataset.
 
 **Interpretation:**  
@@ -66,6 +69,7 @@ For more details, refer to QIIME2’s official [tutorial](https://amplicon-docs.
 ## Phylogenetic Tree
 
 **Files:** `rooted-tree.qza`  
+
 **Purpose:** Represents the evolutionary relationships among features (ASVs) for use in diversity analyses that require phylogenetic distances.
 
 **Interpretation:**  
@@ -80,6 +84,7 @@ For more details, refer to QIIME2’s official [tutorial](https://amplicon-docs.
 - `evenness.qzv`
 - `faith-pd.qzv`
 - `unweighted_unifrac.qzv`  
+
 **Purpose:** Quantifies and compares microbial diversity within and between samples.
 
 **Interpretation:**  
@@ -92,6 +97,7 @@ For more details, refer to QIIME2’s official [tutorial](https://amplicon-docs.
 ## Rarefaction Curves
 
 **File:** `alpha-rarefaction.qzv`  
+
 **Purpose:** Visualizes sequencing depth vs. observed diversity.  
 
 **Interpretation:**  
@@ -102,6 +108,7 @@ For more details, refer to QIIME2’s official [tutorial](https://amplicon-docs.
 ## Taxonomic Analysis
 
 **File:** `taxa-bar-plots.qzv`  
+
 **Purpose:** Displays the taxonomic composition of samples at multiple classification levels.
 
 **Interpretation:**
@@ -116,7 +123,8 @@ For more details, refer to QIIME2’s official [tutorial](https://amplicon-docs.
 
 **Files:**
 - `da-barplot-vegetation.qzv`
-- `ancombc-level6.qzv`  
+- `ancombc-level6.qzv`
+
 **Purpose:** Identifies taxa that are significantly different in abundance between experimental groups.
 
 

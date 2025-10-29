@@ -18,3 +18,6 @@ nav_order: 1
 - **Interactive quality plot:** Displays the average quality score per base position.  
   - Look for the position where the quality drops sharply.  
   - This helps you decide your **trimming lengths** for DADA2.
+
+![diagram1.1](01.1.png)
+![diagram1.2](01.2.png)

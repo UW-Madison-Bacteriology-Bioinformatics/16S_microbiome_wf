@@ -20,3 +20,7 @@ nav_order: 3
   - Overview: High-level statistics of frequency.  
   - Interactive Sample Detail: Tells you how many times a feature appears in each sample. It's useful for visualizing community composition and richness.  
   - Feature Detail: Frequency table of each feature.
+
+![diagram3.1](03.1.png)
+![diagram3.2](03.2.png)
+![diagram3.3](03.3.png)

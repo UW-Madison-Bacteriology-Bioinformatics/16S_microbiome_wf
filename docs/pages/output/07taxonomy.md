@@ -18,3 +18,5 @@ nav_order: 7
 - You can:
   - Sort samples by metadata category.  
   - Export the visualization as CSV for downstream R analysis.
+
+![diagram7](07.png)

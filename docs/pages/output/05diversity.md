@@ -20,3 +20,7 @@ nav_order: 5
   - Look for **p-values** comparing different groups.
 - `faith-pd.qzv`: Similar to evenness but uses **phylogenetic diversity** instead of counts.
 - `unweighted_unifrac.qzv`: Tests **beta diversity** differences between groups.
+
+![diagram5.1](05.1.png)
+![diagram5.2](05.2.png)
+![diagram5.3](05.3.png)

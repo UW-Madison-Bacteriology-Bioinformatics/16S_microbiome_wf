@@ -19,3 +19,5 @@ nav_order: 8
 - `level-6-da-barplot-vegetation.qzv`: Displays **full taxonomic names** and significance results.  
   - Shows which taxa are **differentially abundant**.  
   - You can customize by changing the taxonomic **level** parameter when running the pipeline. Please check the customization page for the more detailed instruction on this step.
+
+![diagram8](08.png)

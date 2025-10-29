@@ -16,3 +16,4 @@ nav_order: 6
 - Plateau = sufficient sequencing depth; no need for deeper sequencing.  
 - If the curve is still rising, some samples might need higher read depth.
 
+![diagram6](06.png)

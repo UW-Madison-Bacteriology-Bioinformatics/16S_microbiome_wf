@@ -1,67 +1,9 @@
 ---
 layout: default
-title: Step-by-step instructions
+title: Steps
+parent: Instructions
 nav_order: 2
 ---
-
-# Workflow
-## Description of files in this repository:
-
-* `README.md`: These directions
-* `docs/`: Contains files for visualization of documentation on the website
-* `scripts/`: Contains all `.sh`/`.sub` files required for the pipeline.
-  * `00_mkdir.sh`: Script to create directory in staging that will store outputs of jobs
-  * `make_dag.sh`: DAGman configuration file
-  * `00-08`: Executable and submit scripts pairs for HTCondor DAGman jobs
-* `.gitignore`: all files to be ignored
-
-## Before starting
-
-**CHTC account setup**
-
-You will first need access to a `/staging/netid` folder. For more information about `/staging` folders, please visit: https://chtc.cs.wisc.edu/uw-research-computing/file-avail-largedata . The `/staging` folder will be used for the large genomic input files, and the large genomic output files.
-
-In your request, please consider your input files (how many samples will you have, have the size of all your reads and assembled data, as well as your output files).
-
-**Demultiplexed or not?**
-
-You will need **paired-end reads** (Illumina) corresponding to the 16S rRNA gene amplicons.
-
-- Already demultiplexed:
-
-Most of the time, sequencing centers will give you this data already **demultiplexed**, meaning that you will get 2 files per samples, labelled like this: `{sample}_R1_001.fastq.gz` and `{sample}_R2_001.fastq.gz`.
-
-Organize them like this:
- ```
- seqs/{sample}_R1_001.fastq.gz
- seqs/{sample}_R2_001.fastq.gz
- etc.
- ```
-
-
-- Not already demultiplexed:
-
-If the data is not already demultiplexed, you should find a forward reads fastq file, a reverse reads fastq file, and a file with barcodes associated with each sample. 
-
-Organize your files like this:
-```
-seqs/
-seqs/forward.fastq.gz
-seqs/reverse.fastq.gz
-seqs/barcodes.fastq.gz
-```
-
-If you just have fastq files, you can "zip" them into the gz file format by typing:
-```
-gzip forward.fastq
-```
-
-**Sample information**
-
-You will need a **tab-separated table** named exactly `sample-metadata.tsv`, (tsv = tab separated values). The file should contain information about the samples, such as sample characteristics. A TSV file is a text file that can be opened with any regular text editor or spreasheet program. The column names for the sample characteristics should not container any special characters, including dashes. For example, if you have a column named `transect-sites` rename it as `transectSite` (or something without dashes), and save the file again.
-
-{: .note }
-> For your reference, [here](https://drive.google.com/drive/folders/1qCO_ztaghJvXEnkwRji8tGCH98csbijj?usp=sharing) is an example of what the input folder should look like.
 
 ## Steps
 
@@ -134,7 +76,7 @@ This will create a file named `test_project_true.dag` or `test_project_false.dag
 	- A) the proper staging folder structure (path: `/staging/username/project/all job names 00-08`) 
 	- B) a DAG with your desired name in your scripts folder.
 
-7. Import your input data (paired-end fastq files, and `sample-metadata.tsv` file) into your `/staging/username/project/00_pipeline_inputs` directory.
+7. Import your input data (paired-end fastq files, `fastq-manifest.txt`, and `sample-metadata.tsv` file) into your `/staging/username/project/00_pipeline_inputs` directory.
 
 To transfer files from your laptop to CHTC you can do the following:
 	- Open a new terminal window
@@ -144,9 +86,9 @@ cd Downloads
 scp -r ~/Downloads/seqs netid@ap2002.chtc.wisc.edu:/staging/netid/project/00_pipeline_inputs
 ```
 
-Do the same thing to transfer the `sample-metadata.tsv` file to the sample folder:
+Do the same thing to transfer the `sample-metadata.tsv` and `fastq-manifest.txt` files to the sample folder:
 ```
-scp -r ~/Downloads/sample-metadata.tsv netid@ap2002.chtc.wisc.edu:/staging/netid/project/00_pipeline_inputs
+scp -r ~/Downloads/sample-metadata.tsv ~/Downloads/fastq-manifest.txt netid@ap2002.chtc.wisc.edu:/staging/netid/project/00_pipeline_inputs
 ```
 
 The `scp` command takes two arguments. The first one (`~/Downloads/seqs`) is the folder you want to transfer over, and the second argument takes the form of the `sshaddress:path to where you want to put it`
@@ -182,7 +124,7 @@ condor_q
 ```
 
 At this point, you can log out of chtc, the job will still be running.
-Just log back in later to see the job progress by typing condor_q again.
+Just log back in later to see the job progress by typing `condor_q` again.
 
 {: .tip }
 > If after typing `condor_q` you notice that one of your jobs went on hold, you can try to identify the reason by typing `condor_q -hold` or `condor_q -hold jobID`, where jobID is the number in the last column of the terminal printout for condor_q.
@@ -226,4 +168,3 @@ scp -r bbadger@ap2002.chtc.wisc.edu:/staging/bbadger/project ./
 The `.qza` (artefacts) and `qzv` (vizualisations) can be opened using the Qiime2 View website (https://view.qiime2.org/). 
 From your laptop, where you downloaded your CHTC results files, drag and drop them onto the qiime2 View website to view the plots, tables, etc.
 The `qza` files are actually zipped files, so you can also unzip them like a regular `.zip` file.
-

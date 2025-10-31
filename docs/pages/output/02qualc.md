@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 02qualc
+title: 02-qualc
 parent: Result Interpretation
 nav_order: 2
 ---

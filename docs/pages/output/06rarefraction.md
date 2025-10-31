@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 06rarefraction
+title: 06-rarefraction
 parent: Result Interpretation
 nav_order: 6
 ---

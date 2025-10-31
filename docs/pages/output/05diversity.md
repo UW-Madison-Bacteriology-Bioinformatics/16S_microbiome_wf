@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 05diversity
+title: 05-diversity
 parent: Result Interpretation
 nav_order: 5
 ---

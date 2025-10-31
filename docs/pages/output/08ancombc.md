@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 08ancombc
+title: 08-ancombc
 parent: Result Interpretation
 nav_order: 8
 ---

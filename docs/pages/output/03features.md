@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 03features
+title: 03-features
 parent: Result Interpretation
 nav_order: 3
 ---

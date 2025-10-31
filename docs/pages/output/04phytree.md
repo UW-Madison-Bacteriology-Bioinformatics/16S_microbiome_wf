@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 04phytree
+title: 04-phytree
 parent: Result Interpretation
 nav_order: 4
 ---

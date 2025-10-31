@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 07taxonomy
+title: 07-taxonomy
 parent: Result Interpretation
 nav_order: 7
 ---

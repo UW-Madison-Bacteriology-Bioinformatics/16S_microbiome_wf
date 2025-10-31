@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 01demux
+title: 01-import-demux
 parent: Result Interpretation
 nav_order: 1
 ---

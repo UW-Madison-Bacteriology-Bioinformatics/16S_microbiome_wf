@@ -3,15 +3,22 @@
 set -e
 NETID="$1"
 PROJECT="$2"
+export NETID
+export PROJECT
 echo ${NETID}
 echo ${PROJECT}
 
 echo "Container launched successfully..."
 
+MANIFEST_SRC="/staging/${NETID}/${PROJECT}/00_pipeline_inputs/fastq-manifest.txt"
+MANIFEST_TMP="manifest_expanded.txt"
+
+envsubst < "$MANIFEST_SRC" > "$MANIFEST_TMP"
+
 echo "Importing with QIIME tools import..."
 qiime tools import --type 'SampleData[PairedEndSequencesWithQuality]' \
-  --input-path  /staging/${NETID}/${PROJECT}/00_pipeline_inputs/seqs \
-  --input-format CasavaOneEightSingleLanePerSampleDirFmt \
+  --input-path  "$MANIFEST_TMP" \
+  --input-format PairedEndFastqManifestPhred33V2 \
   --output-path demux.qza
 
 ls -lht

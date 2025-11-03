@@ -1,0 +1,67 @@
+---
+layout: default
+title: Before starting
+parent: Instructions
+nav_order: 1
+---
+
+## Before starting
+
+**CHTC account setup**
+
+You will first need access to a `/staging/netid` folder. For more information about `/staging` folders, please visit: https://chtc.cs.wisc.edu/uw-research-computing/file-avail-largedata . The `/staging` folder will be used for the large genomic input files, and the large genomic output files.
+
+In your request, please consider your input files (how many samples will you have, have the size of all your reads and assembled data, as well as your output files).
+
+**Demultiplexed or not?**
+
+You will need **paired-end reads** (Illumina) corresponding to the 16S rRNA gene amplicons.
+
+- Already demultiplexed:
+
+Most of the time, sequencing centers will give you this data already **demultiplexed**, meaning that you will get 2 files per samples, labelled like this: `{sample}_R1_001.fastq.gz` and `{sample}_R2_001.fastq.gz`.
+
+Organize them like this:
+ ```
+ seqs/{sample}_R1_001.fastq.gz
+ seqs/{sample}_R2_001.fastq.gz
+ etc.
+ ```
+
+
+- Not already demultiplexed:
+
+If the data is not already demultiplexed, you should find a forward reads fastq file, a reverse reads fastq file, and a file with barcodes associated with each sample. 
+
+Organize your files like this:
+```
+seqs/
+seqs/forward.fastq.gz
+seqs/reverse.fastq.gz
+seqs/barcodes.fastq.gz
+```
+
+If you just have fastq files, you can "zip" them into the gz file format by typing:
+```
+gzip forward.fastq
+```
+
+**Sample information**
+
+You will need a **tab-separated table** named exactly `sample-metadata.tsv`, (tsv = tab separated values). The file should contain information about the samples, such as sample characteristics. A TSV file is a text file that can be opened with any regular text editor or spreasheet program. The column names for the sample characteristics should not container any special characters, including dashes. For example, if you have a column named `transect-sites` rename it as `transectSite` (or something without dashes), and save the file again.
+
+**Manifest file**
+
+You will need a **tab-separated text file** named exactly `fastq-manifest.txt` for paired-end data (i.e. already demultiplexed data).  This file tells QIIME 2 where each of your FASTQ sequencing files is located.  
+The manifest must include the sample IDs and the **absolute file paths** to your FASTQ files stored under `/staging/username/project/00_pipeline_inputs/seqs/`. This file should include three columns: `sample-id `, `forward-absolute-filepath`, and `reverse-absolute-filepath`.
+
+Each row should correspond to one sample, followed by the full path(s) to its FASTQ files.  
+In this workflow, you can use **environment variables** (`${NETID}` and `${PROJECT}`) in the file paths, which will be automatically replaced by the pipeline during job submission. For example:
+```
+sample-id	forward-absolute-filepath	reverse-absolute-filepath
+BAQ1370.1.2	/staging/${NETID}/${PROJECT}/00_pipeline_inputs/seqs/BAQ1370.1.2_75_L001_R1_001.fastq.gz	/staging/${NETID}/${PROJECT}/00_pipeline_inputs/seqs/BAQ1370.1.2_75_L001_R2_001.fastq.gz
+```
+
+
+{: .note }
+> For your reference, [here](https://drive.google.com/drive/folders/1qCO_ztaghJvXEnkwRji8tGCH98csbijj?usp=sharing) is an example of what the input folder should look like.

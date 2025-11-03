@@ -1,4 +1,5 @@
 title: "16S rRNA Pipeline Documentation"
+baseurl: "/16S_microbiome_wf"
 remote_theme: just-the-docs/just-the-docs
 color_scheme: light
 nav_sort: case_insensitive

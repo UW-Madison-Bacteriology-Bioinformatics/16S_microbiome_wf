@@ -15,5 +15,5 @@ nav_order: 9
 
 
 **Interpretation:**
-- `otu_table.txt`: converted from the **feature** `.qza` file to be readable and ready for importing into other analysis tools.  
+- `otu_table.txt`: converted from the **dada2** `.qza` file to be readable and ready for importing into other analysis tools.  
 - `taxonomy.tsv`: converted from the **taxonomy** `.qza` file to be readable and ready for importing into other analysis tools.  

@@ -23,3 +23,4 @@ For more details, refer to QIIME2’s official [tutorial](https://amplicon-docs.
 | Rarefaction | `alpha-rarefaction.qzv` | Sequencing depth evaluation | Check for plateau |
 | Taxonomy | `taxa-bar-plots.qzv` | Taxonomic composition | Examine dominant taxa |
 | ANCOM-BC | `da-barplot.qzv`, `level-6-da-barplot-vegetation.qzv` | Differential abundance | Identify significant taxa |
+| Final-Files | `otu_table.txt`, `taxonomy.tsv` | Ready to import in R | Readable format for further analysis |

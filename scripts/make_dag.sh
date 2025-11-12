@@ -73,14 +73,17 @@ if [ "$DEMUX" = "TRUE" ]; then
 	echo "VARS TAXONOMY netid=\"$NETID\" project=\"$PROJECT\" db=\"$DATABASE\"" >> "$FILENAME.dag"
 	echo "JOB ANCOMBC 08_ancombc.sub" >> "$FILENAME.dag"
 	echo "VARS ANCOMBC netid=\"$NETID\" project=\"$PROJECT\" column=\"$GROUP\"" >> "$FILENAME.dag"
+	echo "JOB FINALFILES 09_final-files.sub" >> "$FILENAME.dag"
+	echo "VARS FINALFILES netid=\"$NETID\" project=\"$PROJECT\"" >> "$FILENAME.dag"
 
 	echo "PARENT DEMUX CHILD QUALC" >> $FILENAME.dag
-    echo "PARENT QUALC CHILD FEATURES" >> $FILENAME.dag
+    	echo "PARENT QUALC CHILD FEATURES" >> $FILENAME.dag
 	echo "PARENT QUALC CHILD PHYTREE" >> $FILENAME.dag
    	echo "PARENT QUALC PHYTREE CHILD DIVERSITY" >> $FILENAME.dag
 	echo "PARENT QUALC PHYTREE CHILD RAREFACTION" >> $FILENAME.dag
    	echo "PARENT QUALC CHILD TAXONOMY" >> $FILENAME.dag
 	echo "PARENT QUALC TAXONOMY CHILD ANCOMBC" >> $FILENAME.dag
+	echo "PARENT TAXONOMY CHILD FINALFILES" >> $FILENAME.dag
 
 elif [ "$DEMUX" = "FALSE" ]; then
 	echo "JOB IMPORT 01_import.sub" >> "$FILENAME.dag"
@@ -99,14 +102,17 @@ elif [ "$DEMUX" = "FALSE" ]; then
 	echo "VARS TAXONOMY netid=\"$NETID\" project=\"$PROJECT\" db=\"$DATABASE\"" >> "$FILENAME.dag"
 	echo "JOB ANCOMBC 08_ancombc.sub" >> "$FILENAME.dag"
 	echo "VARS ANCOMBC netid=\"$NETID\" project=\"$PROJECT\" column=\"$GROUP\"" >> "$FILENAME.dag"
+	echo "JOB FINALFILES 09_final-files.sub" >> "$FILENAME.dag"
+        echo "VARS FINALFILES netid=\"$NETID\" project=\"$PROJECT\"" >> "$FILENAME.dag"
 
 	echo "PARENT IMPORT CHILD QUALC" >> $FILENAME.dag
-    echo "PARENT QUALC CHILD FEATURES" >> $FILENAME.dag
+    	echo "PARENT QUALC CHILD FEATURES" >> $FILENAME.dag
 	echo "PARENT QUALC CHILD PHYTREE" >> $FILENAME.dag
    	echo "PARENT QUALC PHYTREE CHILD DIVERSITY" >> $FILENAME.dag
 	echo "PARENT QUALC PHYTREE CHILD RAREFACTION" >> $FILENAME.dag
    	echo "PARENT QUALC CHILD TAXONOMY" >> $FILENAME.dag
 	echo "PARENT QUALC TAXONOMY CHILD ANCOMBC" >> $FILENAME.dag
+	echo "PARENT TAXONOMY CHILD FINALFILES" >> $FILENAME.dag
 fi
 
 echo "Created $FILENAME.dag"

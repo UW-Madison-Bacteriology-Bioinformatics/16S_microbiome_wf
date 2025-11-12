@@ -29,6 +29,7 @@ mkdir -p $staging/$project/05_abdiv/
 mkdir -p $staging/$project/06_rarefact/
 mkdir -p $staging/$project/07_taxonomy/
 mkdir -p $staging/$project/08_ancombc/
+mkdir -p $staging/$project/09_final-files/
 
 echo "Created folder structure for 16S rRNA pipeline at $staging/$project"
 echo "Completed"

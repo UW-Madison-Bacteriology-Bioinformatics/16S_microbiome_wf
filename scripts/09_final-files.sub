@@ -1,0 +1,24 @@
+#link container 
+container_image = docker://quay.io/qiime2/amplicon:2025.4
+
+#reference sh script
+executable = 09_final-files.sh
+staging_path = file:///staging/$(netid)/$(project)
+
+arguments = $(netid) $(project)
+ 
+#create log/err/out files
+log = logs/09_final-files_(cluster).log
+error = logs/09_final-files_$(cluster).err
+output = logs/09_final-files_$(cluster).out
+
+#set requirements
+requirements = (HasCHTCStaging == true) && (HasChtcProjects == true) && (OpSysMajorVer > 7)
+
+#make requests and queue
+request_cpus = 8
+request_memory = 12GB
+request_disk = 12GB
+
+queue
+

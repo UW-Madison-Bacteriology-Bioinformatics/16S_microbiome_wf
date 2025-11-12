@@ -19,14 +19,7 @@ You will need **paired-end reads** (Illumina) corresponding to the 16S rRNA gene
 
 - Already demultiplexed:
 
-Most of the time, sequencing centers will give you this data already **demultiplexed**, meaning that you will get 2 files per samples, labelled like this: `{sample}_R1_001.fastq.gz` and `{sample}_R2_001.fastq.gz`.
-
-Organize them like this:
- ```
- seqs/{sample}_R1_001.fastq.gz
- seqs/{sample}_R2_001.fastq.gz
- etc.
- ```
+Most of the time, sequencing centers will give you this data already **demultiplexed**, meaning that you will get 2 files per samples. Then make a `fastq-manifest.txt` file as shown below to match all input sequncing file names.
 
 
 - Not already demultiplexed:

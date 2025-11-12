@@ -8,7 +8,7 @@ staging_path = file:///staging/$(netid)/$(project)
 arguments = $(netid) $(project)
  
 #create log/err/out files
-log = logs/09_final-files_(cluster).log
+log = logs/09_final-files_$(cluster).log
 error = logs/09_final-files_$(cluster).err
 output = logs/09_final-files_$(cluster).out
 

@@ -31,7 +31,7 @@ Go to Interactive Sample Details and play around with the slider to see how incr
 Edit the line `--p-sampling-depth` of the script `05_abdiv.sh` according to what you see in output file 
 
 ## Taxonomy
-`07-taxonomy/taxa-bar-plot.qzv` in qiime2 view: it doesn't look like much at first, but use the drop-down menu to select another taxonomic level (level 1 = kingdom, 2 = phylum, 3=class, 4=order, 5=family, 6=genus), different color palettes, samples, etc. You can even change the color paletter.
+`07-taxonomy/taxa-bar-plot.qzv` in qiime2 view: it doesn't look like much at first, but use the drop-down menu to select another taxonomic level (level 1 = kingdom, 2 = phylum, 3=class, 4=order, 5=family, 6=genus), different color palettes, samples, etc.
 
 ### Change a taxonomy classifier
 This workflow supports multiple pre-trained classifiers for taxonomic assignment. The choice of classifier depends on your research goals and sample type.

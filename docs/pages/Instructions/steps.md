@@ -7,26 +7,26 @@ nav_order: 2
 
 ## Steps
 
-1. Log into CHTC
+1. **Log into CHTC**
 ```
 ssh netid@ap2002.chtc.wisc.edu
 #enter your password
 pwd
 # this will say something like /home/netid
 ```
-2. Clone this directory into your home directory and make all the script executable with the `chmod` command:
+2. **Clone this directory into your home directory and make all the script executable with the `chmod` command:**
 ```
 git clone https://github.com/UW-Madison-Bacteriology-Bioinformatics/16S_microbiome_wf.git
 cd 16S_microbiome_wf
 chmod +x scripts/*.sh
 ```
-3. Create a logs folder in your cloned directory (path: `home/username/16S_microbiome_wf/scripts`) for your CHTC log, err and out files.
+3. **Create a logs folder in your cloned directory (path: `home/username/16S_microbiome_wf/scripts`) for your CHTC log, err, and out files.**
 ```
 mkdir -p scripts/logs
 ```
 
 
-4. Run the helper script `00_mkdir.sh` from your 16S_microbiome_wf/scripts directory. 
+4. **Run the helper script `00_mkdir.sh` from your 16S_microbiome_wf/scripts directory.** 
 This will create the directory within your staging folder that is necessary to handle all file inputs and outputs. To run, type: ``` bash 00_mkdir.sh ```
 The script takes 2 arguments: your netid, and the name of a folder that will be created. In this example, the folder will be named `my_project`
 ```
@@ -37,7 +37,7 @@ PROJECT=my_project
 bash 00_mkdir.sh $NETID $PROJECT
 ```
 
-5. Run `make_dag.sh` from your scripts directory to create a DAG workflow. 
+5. **Run `make_dag.sh` from your scripts directory to create a DAG workflow.** 
 Be sure to include the six neccessary arguments for it to work.
 
 ```
@@ -68,15 +68,15 @@ This will create a file named `test_project_true.dag` or `test_project_false.dag
 > For a temporary fix, you could also renamed your columns in your sample-metadata.tsv file such as there are no dashes (e.g transect-name would be TransectName) and use that as the group name when using `make_dag.sh`
 
 {: .note }
-> Check out all options for reference databases in the customization part below.
+> Check out all options for reference databases in the [customization page](https://uw-madison-bacteriology-bioinformatics.github.io/16S_microbiome_wf/pages/customization.html). Generally, `silva-full` is the most common one to use.
 
 {:style="counter-reset:none"}
 
-6. Confirm that you have:
+6. **Confirm that you have:**
 	- A) the proper staging folder structure (path: `/staging/username/project/all job names 00-08`) 
 	- B) a DAG with your desired name in your scripts folder.
 
-7. Import your input data (paired-end fastq files, `fastq-manifest.txt`, and `sample-metadata.tsv` file) into your `/staging/username/project/00_pipeline_inputs` directory.
+7. **Import your input data (paired-end fastq files, `fastq-manifest.txt`, and `sample-metadata.tsv` file) into your `/staging/username/project/00_pipeline_inputs` directory.**
 
 To transfer files from your laptop to CHTC you can do the following:
 	- Open a new terminal window
@@ -98,7 +98,7 @@ For your reference, [here](https://drive.google.com/drive/folders/1qCO_ztaghJvXE
 
 {:style="counter-reset:none"}
 
-8. Switch terminal windows and check that the files are transferred correctly.
+8. **Switch terminal windows and check that the files are transferred correctly.**
 ```
 ls /staging/netid/project/00_pipeline_inputs/seqs
 ls /staging/netid/project/00_pipeline_inputs/
@@ -108,7 +108,7 @@ You should be able to see all your paired FASTQ files - if not, try to troublesh
 
 {:style="counter-reset:none"}
 
-9. Navigate back to your `/home/username/16S_microbiome_wf/scripts` folder, and from there submit the dag.
+9. **Navigate back to your `/home/username/16S_microbiome_wf/scripts` folder, and from there submit the dag.**
 
 ```
 cd ~/16S_microbiome_wf/scripts
@@ -117,7 +117,7 @@ condor_submit_dag test_project_dag.dag
 
 {:style="counter-reset:none"}
 
-10. Check your DAG's status with:
+10. **Check your DAG's status with:**
 
 ```
 condor_q
@@ -132,9 +132,12 @@ Just log back in later to see the job progress by typing `condor_q` again.
 
 {:style="counter-reset:none"}
 
-11. The result for each job should appear within its respective output file within the `/staging/$NETID/$PROJECT` directory.
+11. **The result for each job should appear within its respective output file within the `/staging/$NETID/$PROJECT` directory.**
 
-12. Transfer your files from CHTC to your computer once the job is correctly completed. The `/staging` folder is intended for short-term storage of large files, but it does not guarantee long-term backup or permanence. Files may be automatically deleted after a certain period of time. Additionally, you should transfer your output files before submitting your next DAGMan workflow, because by default the workflow will generate output files with the same names. If the files remain in staging, they will be overwritten by the new run unless you manually rename them or follow the same procedure to make a new `.dag` file with a new `project` folder name. One recommended way to transfer files to local is shown below:
+{: .note }
+> Check the read filtering QC after DADA2 runs. Manually enter the numbers of where to trim to assure it is down properly before downstream analyses. You can find a more detailed explanation and tutorial on custimizing trimming lentgth in [customization page](https://uw-madison-bacteriology-bioinformatics.github.io/16S_microbiome_wf/pages/customization.html).
+
+13. **Transfer your files from CHTC to your computer once the job is correctly completed.** The `/staging` folder is intended for short-term storage of large files, but it does not guarantee long-term backup or permanence. Files may be automatically deleted after a certain period of time. Additionally, you should transfer your output files before submitting your next DAGMan workflow, because by default the workflow will generate output files with the same names. If the files remain in staging, they will be overwritten by the new run unless you manually rename them or follow the same procedure to make a new `.dag` file with a new `project` folder name. One recommended way to transfer files to local is shown below:
 
 To do so, open a new Terminal window.
 

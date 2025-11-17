@@ -68,7 +68,7 @@ This will create a file named `test_project_true.dag` or `test_project_false.dag
 > For a temporary fix, you could also renamed your columns in your sample-metadata.tsv file such as there are no dashes (e.g transect-name would be TransectName) and use that as the group name when using `make_dag.sh`
 
 {: .note }
-> Check out all options for reference databases in the customization part below.
+> Check out all options for reference databases in the `customization` page. Generally, `silva-full` is the most common one to use.
 
 {:style="counter-reset:none"}
 
@@ -134,7 +134,10 @@ Just log back in later to see the job progress by typing `condor_q` again.
 
 11. **The result for each job should appear within its respective output file within the `/staging/$NETID/$PROJECT` directory.**
 
-12. **Transfer your files from CHTC to your computer once the job is correctly completed.** The `/staging` folder is intended for short-term storage of large files, but it does not guarantee long-term backup or permanence. Files may be automatically deleted after a certain period of time. Additionally, you should transfer your output files before submitting your next DAGMan workflow, because by default the workflow will generate output files with the same names. If the files remain in staging, they will be overwritten by the new run unless you manually rename them or follow the same procedure to make a new `.dag` file with a new `project` folder name. One recommended way to transfer files to local is shown below:
+{: .note }
+> Check the read filtering QC after DADA2 runs. Manually enter the numbers of where to trim to assure it is down properly before downstream analyses. You can find a more detailed explanation and tutorial on custimizing trimming lentgth in `customization` page.
+
+13. **Transfer your files from CHTC to your computer once the job is correctly completed.** The `/staging` folder is intended for short-term storage of large files, but it does not guarantee long-term backup or permanence. Files may be automatically deleted after a certain period of time. Additionally, you should transfer your output files before submitting your next DAGMan workflow, because by default the workflow will generate output files with the same names. If the files remain in staging, they will be overwritten by the new run unless you manually rename them or follow the same procedure to make a new `.dag` file with a new `project` folder name. One recommended way to transfer files to local is shown below:
 
 To do so, open a new Terminal window.
 

@@ -15,18 +15,16 @@ transfer_input_files = \
 
 #state the output files
 transfer_output_files = faith-pd-group-significance.qzv, \
+ diversity-core-metrics-phylogenetic.tar.gz, \
   evenness-group-significance.qzv, \
   unweighted-unifrac-$(column)-group-significance.qzv
-#  unweighted-unifrac-subject-group-significance.qzv, \
-#  unweighted-unifrac-emperor-days-since-experiment-start.qzv, \
-#  bray-curtis-emperor-days-since-experiment-start.qzv
 
 #remap outputs to desired location
 transfer_output_remaps = "faith-pd-group-significance.qzv = $(staging_path)/05_abdiv/faith-pd-group-significance.qzv; \
   evenness-group-significance.qzv = $(staging_path)/05_abdiv/evenness-group-significance.qzv; \
-  unweighted-unifrac-$(column)-group-significance.qzv = $(staging_path)/05_abdiv/unweighted-unifrac-$(column)-group-significance.qzv"
+  unweighted-unifrac-$(column)-group-significance.qzv = $(staging_path)/05_abdiv/unweighted-unifrac-$(column)-group-significance.qzv; \
+diversity-core-metrics-phylogenetic.tar.gz = $(staging_path)/05_abdiv/diversity-core-metrics-phylogenetic.tar.gz"
    
-
 #create log/err/out files
 log = logs/05_abdiv$(cluster).log
 error = logs/05_abdiv$(cluster).err

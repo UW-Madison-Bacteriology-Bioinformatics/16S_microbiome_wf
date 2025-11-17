@@ -12,6 +12,7 @@ qiime diversity core-metrics-phylogenetic \
   --m-metadata-file sample-metadata.tsv \
   --output-dir diversity-core-metrics-phylogenetic
 
+
 echo  "Testing for differences in alpha diversity between groups of samples..."
 
 qiime diversity alpha-group-significance \
@@ -32,6 +33,26 @@ qiime diversity beta-group-significance \
   --m-metadata-column ${COLUMN} \
   --p-pairwise \
   --o-visualization unweighted-unifrac-${COLUMN}-group-significance.qzv
+
+# Emperor plots:
+qiime emperor plot \
+  --i-pcoa core-metrics-results/unweighted_unifrac_pcoa_results.qza \
+  --m-metadata-file sample-metadata.tsv \
+  --p-custom-axes ${COLUMN} \
+  --o-visualization core-metrics-results/unweighted-unifrac-emperor-days-since-experiment-start.qzv
+
+qiime emperor plot \
+  --i-pcoa core-metrics-results/bray_curtis_pcoa_results.qza \
+  --m-metadata-file sample-metadata.tsv \
+  --p-custom-axes ${COLUMN} \
+  --o-visualization core-metrics-results/bray-curtis-emperor-days-since-experiment-start.qzv
+
+
+ls diversity-core-metrics-phylogenetic
+
+tar cfv diversity-core-metrics-phylogenetic.tar.gz diversity-core-metrics-phylogenetic
+
+ls
 
 echo "Job 05 Complete!"
 

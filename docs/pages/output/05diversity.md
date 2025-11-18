@@ -92,5 +92,8 @@ Additionally **Emperor Plots** (aka ordination plots) are found here:
 
 **Interpretation:**  
 
+Ordination plot: ![Ordination Plot](05.4.png)
+
+
 
 Ref: For more information, visit this website: https://docs.qiime2.org/2024.10/tutorials/moving-pictures/#alpha-and-beta-diversity-analysis 

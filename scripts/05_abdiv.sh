@@ -4,7 +4,7 @@ COLUMN="$1"
 CPU="$2"
 
 echo "The group we are using is: ${COLUMN}"
-echo "using cpus: ${CPU}
+echo "using cpus: ${CPU}"
 
 echo "Computing diversity metrics..."
 
@@ -48,13 +48,11 @@ qiime diversity beta-group-significance \
 qiime emperor plot \
   --i-pcoa core-metrics-results/unweighted_unifrac_pcoa_results.qza \
   --m-metadata-file sample-metadata.tsv \
-  --p-custom-axes ${COLUMN} \
   --o-visualization core-metrics-results/unweighted-unifrac-emperor-${COLUMN}.qzv
 
 qiime emperor plot \
   --i-pcoa core-metrics-results/bray_curtis_pcoa_results.qza \
   --m-metadata-file sample-metadata.tsv \
-  --p-custom-axes ${COLUMN} \
   --o-visualization core-metrics-results/bray-curtis-emperor-${COLUMN}.qzv
 
 ls core-metrics-results

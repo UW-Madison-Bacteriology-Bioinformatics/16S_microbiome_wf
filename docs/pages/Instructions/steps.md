@@ -3,9 +3,10 @@ layout: default
 title: Steps
 parent: Instructions
 nav_order: 2
+
 ---
 
-## Steps
+# Steps
 
 1. **Log into CHTC**
 ```
@@ -14,17 +15,18 @@ ssh netid@ap2002.chtc.wisc.edu
 pwd
 # this will say something like /home/netid
 ```
+
 2. **Clone this directory into your home directory and make all the script executable with the `chmod` command:**
 ```
 git clone https://github.com/UW-Madison-Bacteriology-Bioinformatics/16S_microbiome_wf.git
 cd 16S_microbiome_wf
 chmod +x scripts/*.sh
 ```
+
 3. **Create a logs folder in your cloned directory (path: `home/username/16S_microbiome_wf/scripts`) for your CHTC log, err, and out files.**
 ```
 mkdir -p scripts/logs
 ```
-
 
 4. **Run the helper script `00_mkdir.sh` from your 16S_microbiome_wf/scripts directory.** 
 This will create the directory within your staging folder that is necessary to handle all file inputs and outputs. To run, type: ``` bash 00_mkdir.sh ```
@@ -63,14 +65,14 @@ Example usage: bash make_dag.sh -d FALSE -n bbadger -g vegetation -p my_project 
 This will create a file named `test_project_true.dag` or `test_project_false.dag`
 
 {: .note }
-> 07/15: For now, the group (`-g`) must be a categorical variable without any special characters. For example transect-name will not work because of the dash, but the group vegetation will. See Input Files above.
-> This will be fixed in future iterations.
-> For a temporary fix, you could also renamed your columns in your sample-metadata.tsv file such as there are no dashes (e.g transect-name would be TransectName) and use that as the group name when using `make_dag.sh`
+07/15: For now, the group (`-g`) must be a categorical variable without any special characters. For example transect-name will not work because of the dash, but the group vegetation will. See Input Files above.
+This will be fixed in future iterations.
+
+{: .note }
+For a temporary fix, you could also renamed your columns in your sample-metadata.tsv file such as there are no dashes (e.g transect-name would be TransectName) and use that as the group name when using `make_dag.sh`
 
 {: .note }
 > Check out all options for reference databases in the [customization page](https://uw-madison-bacteriology-bioinformatics.github.io/16S_microbiome_wf/pages/customization.html). Generally, `silva-full` is the most common one to use.
-
-{:style="counter-reset:none"}
 
 6. **Confirm that you have:**
 	- A) the proper staging folder structure (path: `/staging/username/project/all job names 00-08`) 
@@ -94,9 +96,8 @@ scp -r ~/Downloads/sample-metadata.tsv ~/Downloads/fastq-manifest.txt netid@ap20
 The `scp` command takes two arguments. The first one (`~/Downloads/seqs`) is the folder you want to transfer over, and the second argument takes the form of the `sshaddress:path to where you want to put it`
 
 {: .note }
-For your reference, [here](https://drive.google.com/drive/folders/1qCO_ztaghJvXEnkwRji8tGCH98csbijj?usp=sharing) is an example of what the input  `00_pipeline_inputs` folder should look like.
+> For your reference, [here](https://drive.google.com/drive/folders/1qCO_ztaghJvXEnkwRji8tGCH98csbijj?usp=sharing) is an example of what the input  `00_pipeline_inputs` folder should look like.
 
-{:style="counter-reset:none"}
 
 8. **Switch terminal windows and check that the files are transferred correctly.**
 ```
@@ -106,7 +107,6 @@ ls /staging/netid/project/00_pipeline_inputs/
 
 You should be able to see all your paired FASTQ files - if not, try to troubleshoot the `scp` command or ask for help.
 
-{:style="counter-reset:none"}
 
 9. **Navigate back to your `/home/username/16S_microbiome_wf/scripts` folder, and from there submit the dag.**
 
@@ -115,7 +115,6 @@ cd ~/16S_microbiome_wf/scripts
 condor_submit_dag test_project_dag.dag
 ```
 
-{:style="counter-reset:none"}
 
 10. **Check your DAG's status with:**
 
@@ -126,11 +125,10 @@ condor_q
 At this point, you can log out of chtc, the job will still be running.
 Just log back in later to see the job progress by typing `condor_q` again.
 
-{: .tip }
+{: .note }
 > If after typing `condor_q` you notice that one of your jobs went on hold, you can try to identify the reason by typing `condor_q -hold` or `condor_q -hold jobID`, where jobID is the number in the last column of the terminal printout for condor_q.
 > Carefully read the message, and it might tell you that there was an issue during file transfer input or output. Common mistakes are incorrect file naming, in which case you will see something like "file not found". Carefully read that the path of the file it is trying to transfer is correct and exists.
 
-{:style="counter-reset:none"}
 
 11. **The result for each job should appear within its respective output file within the `/staging/$NETID/$PROJECT` directory.**
 
@@ -166,7 +164,7 @@ cd my_chtc_results
 scp -r bbadger@ap2002.chtc.wisc.edu:/staging/bbadger/project ./
 ```
 
-## Next steps
+# Next steps
 
 The `.qza` (artefacts) and `qzv` (vizualisations) can be opened using the Qiime2 View website (https://view.qiime2.org/). 
 From your laptop, where you downloaded your CHTC results files, drag and drop them onto the qiime2 View website to view the plots, tables, etc.

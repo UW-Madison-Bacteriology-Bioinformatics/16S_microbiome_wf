@@ -63,7 +63,16 @@ if [[ "$DATABASE" == "gg2-515f" ]]; then
   wget -O "$CLASSIFIER" "$URL"
 fi
 
-echo "Classifying data..."
+if [[ "$DATABASE" == "MIMt-18S-small" ]]; then
+    CLASSIFIER="MIMt-18S_M2c_25_10_classifier.qza"
+    URL="https://people.biopolis.pt/bu/mimt/downloads/18S_files/MIMt-18S_M2c_25_10_classifier.qza.gz"
+  echo "Downloading classifier from $URL ..."
+  wget -O MIMt-18S_M2c_25_10_classifier.qza.gz "$URL"
+  gunzip MIMt-18S_M2c_25_10_classifier.qza.gz
+
+fi
+
+echo "Classifying data using $CLASSIFER..."
 
 qiime feature-classifier classify-sklearn \
   --i-classifier "$CLASSIFIER" \

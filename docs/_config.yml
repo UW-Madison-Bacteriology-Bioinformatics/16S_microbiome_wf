@@ -11,3 +11,22 @@ aux_links:
     - "//github.com/UW-Madison-Bacteriology-Bioinformatics/16S_microbiome_wf"
 
 nav_enabled: true
+
+callouts_level: quiet # or loud
+callouts:
+  highlight:
+    color: yellow
+  important:
+    title: Important
+    color: blue
+  new:
+    title: New
+    color: green
+  note:
+    title: Note
+    color: purple
+  warning:
+    title: Warning
+    color: red
+
+

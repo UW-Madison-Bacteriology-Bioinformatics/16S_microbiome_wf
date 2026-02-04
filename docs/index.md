@@ -16,6 +16,9 @@ This guide walks you through the setup, execution, and customization of your wor
 
 **Uses:** This pipeline can be used to assess bacterial communities and generate visualizations based off of their data. Due to its reproducibility, and modular nature, scripts can be modified as needed for custom analyses. It is highly recommended to consult the documentation listed in References below if one is interested in working with this version.
 
+**Versions**: There are 2 versions of this pipeline. One is the "main" version, which assumes your data is in /staging/netid. If you data is fairly small in terms of total size, you may be able to run it and get all the outputs to your "home" folder. 
+Please see the page Instructions > Steps more more information!
+
 ## Diagram with steps of pipeline
 ![diagram of 16S workflow DAG](figure_16S_wf.png)
 

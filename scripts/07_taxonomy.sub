@@ -2,31 +2,31 @@
 container_image = docker://quay.io/qiime2/amplicon:2025.4
 
 #reference sh script
-executable = home.sh
+executable = 07_taxonomy.sh
 arguments = $(netid) $(project) $(db)
-staging_path = /staging/$(netid)/$(project)
+home_path = /home/$(netid)/$(project)
 
 #state path to input files
 transfer_input_files = \
-  $(staging_path)/02_dada2_qc/rep-seqs.qza, \
-  $(staging_path)/02_dada2_qc/table.qza, \
-  $(staging_path)/00_pipeline_inputs/sample-metadata.tsv
+  $(home_path)/02_dada2_qc/rep-seqs.qza, \
+  $(home_path)/02_dada2_qc/table.qza, \
+  $(home_path)/00_pipeline_inputs/sample-metadata.tsv
 
 #state the output files
 transfer_output_files = taxonomy.qza, taxonomy.qzv, taxa-bar-plots.qzv
 
 #remap outputs to desired location
-transfer_output_remaps = "taxonomy.qza = $(staging_path)/home/taxonomy.qza; \
-  taxonomy.qzv = $(staging_path)/home/taxonomy.qzv; \
-  taxa-bar-plots.qzv = $(staging_path)/home/taxa-bar-plots.qzv"
+transfer_output_remaps = "taxonomy.qza = $(home_path)/07_taxonomy/taxonomy.qza; \
+  taxonomy.qzv = $(home_path)/07_taxonomy/taxonomy.qzv; \
+  taxa-bar-plots.qzv = $(home_path)/07_taxonomy/taxa-bar-plots.qzv"
 
 #create log/err/out files
-log = logs/home$(cluster).log
-error = logs/home$(cluster).err
-output = logs/home$(cluster).out
+log = logs/07_taxonomy$(cluster).log
+error = logs/07_taxonomy$(cluster).err
+output = logs/07_taxonomy$(cluster).out
 
 #set requirements
-requirements = (HasCHTCStaging == true) && (HasChtcProjects == true) && (OpSysMajorVer > 7)
+requirements = (OpSysMajorVer > 7)
 
 #make requests and queue
 request_cpus = 8

@@ -25,7 +25,7 @@ error = logs/05_abdiv$(cluster).err
 output = logs/05_abdiv$(cluster).out
 
 #set requirements
-requirements = (HasCHTChome == true) && (HasChtcProjects == true) && (OpSysMajorVer > 7)
+requirements = (OpSysMajorVer > 7)
 
 #make requests and queue
 request_cpus = 16

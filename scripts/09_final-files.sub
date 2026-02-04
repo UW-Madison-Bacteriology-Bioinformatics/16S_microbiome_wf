@@ -17,7 +17,7 @@ error = logs/09_final-files_$(cluster).err
 output = logs/09_final-files_$(cluster).out
 
 #set requirements
-requirements = (HasCHTCStaging == true) && (HasChtcProjects == true) && (OpSysMajorVer > 7)
+requirements = (OpSysMajorVer > 7)
 
 #make requests and queue
 request_cpus = 8

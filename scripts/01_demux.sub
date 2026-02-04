@@ -27,7 +27,7 @@ error = logs/01_demux$(cluster).err
 output = logs/01_demux$(cluster).out
 
 #set requirements
-requirements = (HasCHTChome == true) && (HasChtcProjects == true) && (OpSysMajorVer > 7) 
+requirements = (OpSysMajorVer > 7) 
 
 #make requests and queue
 request_cpus = 8

@@ -23,18 +23,25 @@ cd 16S_microbiome_wf
 chmod +x scripts/*.sh
 ```
 
+>[!NOTE]
+>If your data is in home instead, and you want to run the whole wf from there instead of staging you can type:
+>`git clone -b home https://github.com/UW-Madison-Bacteriology-Bioinformatics/16S_microbiome_wf.git`
+>If you already typed the git clone command above and now want to get scripts to run it from home, `cd` into the downloaded folder, then type:
+>`git pull origin home`
+>Type `git branch` to know if you're on the `main` or `home` branch.
+
 3. **Create a logs folder in your cloned directory (path: `home/username/16S_microbiome_wf/scripts`) for your CHTC log, err, and out files.**
 ```
 mkdir -p scripts/logs
 ```
 
 4. **Run the helper script `00_mkdir.sh` from your 16S_microbiome_wf/scripts directory.** 
-This will create the directory within your staging folder that is necessary to handle all file inputs and outputs. To run, type: ``` bash 00_mkdir.sh ```
+This will create the directory within your staging (or home) folder that is necessary to handle all file inputs and outputs. To run, type: ``` bash 00_mkdir.sh ```
 The script takes 2 arguments: your netid, and the name of a folder that will be created. In this example, the folder will be named `my_project`
 ```
 cd scripts
 # change this for your netid
-NETID=ptran5
+NETID=bbadger
 PROJECT=my_project
 bash 00_mkdir.sh $NETID $PROJECT
 ```
@@ -75,22 +82,23 @@ For a temporary fix, you could also renamed your columns in your sample-metadata
 > Check out all options for reference databases in the [customization page](https://uw-madison-bacteriology-bioinformatics.github.io/16S_microbiome_wf/pages/customization.html). Generally, `silva-full` is the most common one to use.
 
 6. **Confirm that you have:**
-	- A) the proper staging folder structure (path: `/staging/username/project/all job names 00-08`) 
+	- A) the proper staging folder structure (path: `/staging/username/project/all job names 00-08`)
+	- A2) If you are running the `home` version of the scripts, the path is: `/home/username/project/all job names 00-08
 	- B) a DAG with your desired name in your scripts folder.
 
-7. **Import your input data (paired-end fastq files, `fastq-manifest.txt`, and `sample-metadata.tsv` file) into your `/staging/username/project/00_pipeline_inputs` directory.**
+7. **Import your input data (paired-end fastq files, `fastq-manifest.txt`, and `sample-metadata.tsv` file) into your `/staging/username/project/00_pipeline_inputs` directory (or `/home/username/project/00_pipeline_inputs`).**
 
 To transfer files from your laptop to CHTC you can do the following:
 	- Open a new terminal window
 	- From your laptop navigate to where the FASTQ files are located
 ```
 cd Downloads
-scp -r ~/Downloads/seqs netid@ap2002.chtc.wisc.edu:/staging/netid/project/00_pipeline_inputs
+scp -r ~/Downloads/seqs netid@ap2002.chtc.wisc.edu:/stagingORhome/netid/project/00_pipeline_inputs
 ```
 
 Do the same thing to transfer the `sample-metadata.tsv` and `fastq-manifest.txt` files to the sample folder:
 ```
-scp -r ~/Downloads/sample-metadata.tsv ~/Downloads/fastq-manifest.txt netid@ap2002.chtc.wisc.edu:/staging/netid/project/00_pipeline_inputs
+scp -r ~/Downloads/sample-metadata.tsv ~/Downloads/fastq-manifest.txt netid@ap2002.chtc.wisc.edu:/stagingORhome/netid/project/00_pipeline_inputs
 ```
 
 The `scp` command takes two arguments. The first one (`~/Downloads/seqs`) is the folder you want to transfer over, and the second argument takes the form of the `sshaddress:path to where you want to put it`
@@ -101,8 +109,8 @@ The `scp` command takes two arguments. The first one (`~/Downloads/seqs`) is the
 
 8. **Switch terminal windows and check that the files are transferred correctly.**
 ```
-ls /staging/netid/project/00_pipeline_inputs/seqs
-ls /staging/netid/project/00_pipeline_inputs/
+ls /stagingORhome/netid/project/00_pipeline_inputs/seqs
+ls /stagingORhome/netid/project/00_pipeline_inputs/
 ```
 
 You should be able to see all your paired FASTQ files - if not, try to troubleshoot the `scp` command or ask for help.
@@ -130,12 +138,12 @@ Just log back in later to see the job progress by typing `condor_q` again.
 > Carefully read the message, and it might tell you that there was an issue during file transfer input or output. Common mistakes are incorrect file naming, in which case you will see something like "file not found". Carefully read that the path of the file it is trying to transfer is correct and exists.
 
 
-11. **The result for each job should appear within its respective output file within the `/staging/$NETID/$PROJECT` directory.**
+11. **The result for each job should appear within its respective output file within the `/stagingORhome/$NETID/$PROJECT` directory.**
 
 {: .note }
 > Check the read filtering QC after DADA2 runs. Manually enter the numbers of where to trim to assure it is down properly before downstream analyses. You can find a more detailed explanation and tutorial on custimizing trimming lentgth in [customization page](https://uw-madison-bacteriology-bioinformatics.github.io/16S_microbiome_wf/pages/customization.html).
 
-13. **Transfer your files from CHTC to your computer once the job is correctly completed.** The `/staging` folder is intended for short-term storage of large files, but it does not guarantee long-term backup or permanence. Files may be automatically deleted after a certain period of time. Additionally, you should transfer your output files before submitting your next DAGMan workflow, because by default the workflow will generate output files with the same names. If the files remain in staging, they will be overwritten by the new run unless you manually rename them or follow the same procedure to make a new `.dag` file with a new `project` folder name. One recommended way to transfer files to local is shown below:
+13. **Transfer your files from CHTC to your computer once the job is correctly completed.** The `/staging` or `/home` folder is intended for short-term storage of large files, but it does not guarantee long-term backup or permanence. Files may be automatically deleted after a certain period of time. Additionally, you should transfer your output files before submitting your next DAGMan workflow, because by default the workflow will generate output files with the same names. If the files remain in staging or home, they will be overwritten by the new run unless you manually rename them or follow the same procedure to make a new `.dag` file with a new `project` folder name. One recommended way to transfer files to local is shown below:
 
 To do so, open a new Terminal window.
 
@@ -149,7 +157,7 @@ cd my_chtc_results
 
 ```
 sftp netid@ap2002.cthc.wisc.edu
-cd /staging/username/project
+cd /stagingORhome/username/project
 get -r *
 exit
 ```
@@ -161,7 +169,7 @@ cd ~/Downloads
 mkdir -p my_chtc_results
 cd my_chtc_results
 # replace the netid and the file paths as appropriate, the ./ means transfer these files to the current directory, which would be my_chtc_results in this case 
-scp -r bbadger@ap2002.chtc.wisc.edu:/staging/bbadger/project ./
+scp -r bbadger@ap2002.chtc.wisc.edu:/stagingORhome/bbadger/project ./
 ```
 
 # Next steps

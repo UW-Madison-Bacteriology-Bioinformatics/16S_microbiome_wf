@@ -9,9 +9,20 @@ nav_order: 1
 
 **CHTC account setup**
 
+There are 2 ways to run this workflow, and it depends on your data input file size. 
+The home folder has a smaller disk size limit, but unlimited files count, and comes automatically when you create an account.
+The staging folder needs to be manually requested by filling in a form, but works well if you have large files (~100MB each), but it does come with a file count number limit. Additionally, if you run out of space, you need to manually requested more disk/file limit.
+
+For this reason, we have 2 versions of this `16S_wf`. 
+
+**1. Version main**:
+
 You will first need access to a `/staging/netid` folder. For more information about `/staging` folders, please visit: https://chtc.cs.wisc.edu/uw-research-computing/file-avail-largedata . The `/staging` folder will be used for the large genomic input files, and the large genomic output files.
 
 In your request, please consider your input files (how many samples will you have, have the size of all your reads and assembled data, as well as your output files).
+
+**2. Version home**
+You will need access to `/home/netid`. Check your quota by typing `get_quotas` once logged in to view how much space/files you have remaining. Make sure it has enough disk space for your input files, and estimate enough space for your output files.
 
 **Demultiplexed or not?**
 

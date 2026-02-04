@@ -2,9 +2,9 @@
 container_image = docker://quay.io/qiime2/amplicon:2025.4
 
 #reference sh script
-executable = 07_taxonomy.sh
+executable = home.sh
 arguments = $(netid) $(project) $(db)
-staging_path = file:///staging/$(netid)/$(project)
+staging_path = /staging/$(netid)/$(project)
 
 #state path to input files
 transfer_input_files = \
@@ -16,14 +16,14 @@ transfer_input_files = \
 transfer_output_files = taxonomy.qza, taxonomy.qzv, taxa-bar-plots.qzv
 
 #remap outputs to desired location
-transfer_output_remaps = "taxonomy.qza = $(staging_path)/07_taxonomy/taxonomy.qza; \
-  taxonomy.qzv = $(staging_path)/07_taxonomy/taxonomy.qzv; \
-  taxa-bar-plots.qzv = $(staging_path)/07_taxonomy/taxa-bar-plots.qzv"
+transfer_output_remaps = "taxonomy.qza = $(staging_path)/home/taxonomy.qza; \
+  taxonomy.qzv = $(staging_path)/home/taxonomy.qzv; \
+  taxa-bar-plots.qzv = $(staging_path)/home/taxa-bar-plots.qzv"
 
 #create log/err/out files
-log = logs/07_taxonomy$(cluster).log
-error = logs/07_taxonomy$(cluster).err
-output = logs/07_taxonomy$(cluster).out
+log = logs/home$(cluster).log
+error = logs/home$(cluster).err
+output = logs/home$(cluster).out
 
 #set requirements
 requirements = (HasCHTCStaging == true) && (HasChtcProjects == true) && (OpSysMajorVer > 7)

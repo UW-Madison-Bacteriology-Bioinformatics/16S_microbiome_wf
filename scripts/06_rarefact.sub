@@ -3,19 +3,19 @@ container_image = docker://quay.io/qiime2/amplicon:2025.4
 
 #reference sh script
 executable = 06_rarefact.sh
-staging_path = file:///staging/$(netid)/$(project)
+home_path = /home/$(netid)/$(project)
 
 #state path to input files
 transfer_input_files = \
-  $(staging_path)/02_dada2_qc/table.qza, \
-  $(staging_path)/04_phytree/rooted-tree.qza, \
-  $(staging_path)/00_pipeline_inputs/sample-metadata.tsv
+  $(home_path)/02_dada2_qc/table.qza, \
+  $(home_path)/04_phytree/rooted-tree.qza, \
+  $(home_path)/00_pipeline_inputs/sample-metadata.tsv
 
 #state the output files
 transfer_output_files = alpha-rarefaction.qzv
 
 #remap outputs to desired location
-transfer_output_remaps = "alpha-rarefaction.qzv = $(staging_path)/06_rarefact/alpha-rarefaction.qzv"
+transfer_output_remaps = "alpha-rarefaction.qzv = $(home_path)/06_rarefact/alpha-rarefaction.qzv"
 
 #create log/err/out files
 log = logs/06_rarefact$(cluster).log
@@ -23,7 +23,7 @@ error = logs/06_rarefact$(cluster).err
 output = logs/06_rarefact$(cluster).out
 
 #set requirements
-requirements = (HasCHTCStaging == true) && (HasChtcProjects == true) && (OpSysMajorVer > 7)
+requirements = (HasCHTChome == true) && (HasChtcProjects == true) && (OpSysMajorVer > 7)
 
 #make requests and queue
 request_cpus = 8

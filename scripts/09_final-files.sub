@@ -3,7 +3,11 @@ container_image = docker://quay.io/qiime2/amplicon:2025.4
 
 #reference sh script
 executable = 09_final-files.sh
-staging_path = file:///staging/$(netid)/$(project)
+home_path = /home/$(netid)/$(project)
+
+transfer_input_files = $(home_path)/02_dada2_qc/table.qza , $(home_path)/07_taxonomy/taxonomy.qza
+transfer_output_files = final_files_output/otu_table.tsv, final_files_output/taxonomy.tsv
+transfer_output_remaps = "final_files_output/otu_table.tsv=$(home_path)/09_final-files/otu_table.tsv, final_files_output/taxonomy.tsv=$(home_path)/09_final-files/taxonomy.tsv"
 
 arguments = $(netid) $(project)
  

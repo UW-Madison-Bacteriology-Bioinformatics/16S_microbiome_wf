@@ -14,22 +14,22 @@ project="$2"
 echo "NetID is: ${NETID}"
 echo "Project name is: ${project}"
 
-staging="/staging/${NETID}"
+home="/home/${NETID}"
 
-echo "Folder will be created at: $staging/$project"
+echo "Folder will be created at: $home/$project"
 
-mkdir -p $staging/$project/
-mkdir -p $staging/$project/00_pipeline_inputs/
-mkdir -p $staging/$project/00_pipeline_inputs/seqs
-mkdir -p $staging/$project/01_import-demux/
-mkdir -p $staging/$project/02_dada2_qc/
-mkdir -p $staging/$project/03_features/
-mkdir -p $staging/$project/04_phytree/
-mkdir -p $staging/$project/05_abdiv/
-mkdir -p $staging/$project/06_rarefact/
-mkdir -p $staging/$project/07_taxonomy/
-mkdir -p $staging/$project/08_ancombc/
-mkdir -p $staging/$project/09_final-files/
+mkdir -p $home/$project/
+mkdir -p $home/$project/00_pipeline_inputs/
+mkdir -p $home/$project/00_pipeline_inputs/seqs
+mkdir -p $home/$project/01_import-demux/
+mkdir -p $home/$project/02_dada2_qc/
+mkdir -p $home/$project/03_features/
+mkdir -p $home/$project/04_phytree/
+mkdir -p $home/$project/05_abdiv/
+mkdir -p $home/$project/06_rarefact/
+mkdir -p $home/$project/07_taxonomy/
+mkdir -p $home/$project/08_ancombc/
+mkdir -p $home/$project/09_final-files/
 
-echo "Created folder structure for 16S rRNA pipeline at $staging/$project"
+echo "Created folder structure for 16S rRNA pipeline at $home/$project"
 echo "Completed"

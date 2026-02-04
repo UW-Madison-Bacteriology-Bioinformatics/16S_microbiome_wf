@@ -10,7 +10,7 @@ echo ${PROJECT}
 
 echo "Container launched successfully..."
 
-MANIFEST_SRC="/staging/${NETID}/${PROJECT}/00_pipeline_inputs/fastq-manifest.txt"
+MANIFEST_SRC="fastq-manifest.txt"
 MANIFEST_TMP="manifest_expanded.txt"
 
 envsubst < "$MANIFEST_SRC" > "$MANIFEST_TMP"

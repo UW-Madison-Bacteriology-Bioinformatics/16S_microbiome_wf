@@ -8,7 +8,8 @@ arguments = $(netid) $(project)
 home_path = /home/$(netid)/$(project)
 
 #state the output files
-transfer_input_files = /home/$(netid)/$(project)/00_pipeline_inputs/fastq-manifest.txt
+transfer_input_files = $(home_path)/00_pipeline_inputs/fastq-manifest.txt, $(home_path)/00_pipeline_inputs/seqs.tar.gz
+
 transfer_output_files = demux.qza, demux.qzv
 
 #remap outputs to desired location

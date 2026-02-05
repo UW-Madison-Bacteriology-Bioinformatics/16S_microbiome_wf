@@ -17,18 +17,20 @@ pwd
 ```
 
 2. **Clone this directory into your home directory and make all the script executable with the `chmod` command:**
+
+
+
 ```
 git clone https://github.com/UW-Madison-Bacteriology-Bioinformatics/16S_microbiome_wf.git
 cd 16S_microbiome_wf
 chmod +x scripts/*.sh
 ```
 
->[!NOTE]
->If your data is in home instead, and you want to run the whole wf from there instead of staging you can type:
->`git clone -b home https://github.com/UW-Madison-Bacteriology-Bioinformatics/16S_microbiome_wf.git`
->If you already typed the git clone command above and now want to get scripts to run it from home, `cd` into the downloaded folder, then type:
->`git pull origin home`
->Type `git branch` to know if you're on the `main` or `home` branch.
+{: .note }
+If your data is in **home** instead, and you want to run the whole wf from there instead of staging you can type:
+`git clone -b home https://github.com/UW-Madison-Bacteriology-Bioinformatics/16S_microbiome_wf.git`
+If you already typed the git clone command above and now want to get scripts to run it from home (instead of staging), you do not need to delete the downloaded folder. Rather, `cd` into the downloaded folder, then type: `git pull origin home`, where `home` is the branch name where we have a slightly different version of the scripts. 
+Then type `git branch` to know if you're on the `main` or `home` branch.
 
 3. **Create a logs folder in your cloned directory (path: `home/username/16S_microbiome_wf/scripts`) for your CHTC log, err, and out files.**
 ```
@@ -80,6 +82,9 @@ For a temporary fix, you could also renamed your columns in your sample-metadata
 
 {: .note }
 > Check out all options for reference databases in the [customization page](https://uw-madison-bacteriology-bioinformatics.github.io/16S_microbiome_wf/pages/customization.html). Generally, `silva-full` is the most common one to use.
+
+{: .note }
+Even if this is called 16S_workflow, we've made available a 18S database as well. 
 
 6. **Confirm that you have:**
 	- A) the proper staging folder structure (path: `/staging/username/project/all job names 00-08`)
@@ -173,6 +178,10 @@ scp -r bbadger@ap2002.chtc.wisc.edu:/stagingORhome/bbadger/project ./
 ```
 
 # Next steps
+
+{: .note }
+It is important to know that the first time you run the workflow, it uses some pre-harcoded trimming parameters for the forward and reverse reads. Make sure you open your qzv files from step 01 (see below), and check the quality scores for your dataset. Then edit the `02_dada2_qc.sh`, remake your dag, and resubmit the steps in this tutorial.
+
 
 The `.qza` (artefacts) and `qzv` (vizualisations) can be opened using the Qiime2 View website (https://view.qiime2.org/). 
 From your laptop, where you downloaded your CHTC results files, drag and drop them onto the qiime2 View website to view the plots, tables, etc.

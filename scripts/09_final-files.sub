@@ -7,10 +7,14 @@ home_path = /home/$(netid)/$(project)
 
 
 transfer_input_files = $(home_path)/02_dada2_qc/table.qza , $(home_path)/07_taxonomy/taxonomy.qza
-transfer_output_files = final_files_output/otu_table.tsv, final_files_output/taxonomy.tsv, final_files_output/feature-table.biom
-transfer_output_remaps = "final_files_output/otu_table.tsv=$(home_path)/09_final-files/otu_table.tsv; \
-final_files_output/taxonomy.tsv=$(home_path)/09_final-files/taxonomy.tsv; \
-final_files_output/feature-table.biom=$(home_path)/09_final-files/feature-table.biom"
+transfer_output_files = final_files_output.tar.gz
+transfer_output_remaps = "final_files_output.tar.gz=/home/$(netid)/$(project)/09_final-files/final_files_output.tar.gz"
+
+#transfer_output_files = final_files_output/otu_table.tsv, final_files_output/taxonomy.tsv, final_files_output/feature-table.biom
+
+#transfer_output_remaps = "final_files_output/otu_table.tsv=$(home_path)/09_final-files/otu_table.tsv;\
+#final_files_output/taxonomy.tsv=$(home_path)/09_final-files/taxonomy.tsv;\
+#final_files_output/feature-table.biom=$(home_path)/09_final-files/feature-table.biom"
 
 arguments = $(netid) $(project)
  

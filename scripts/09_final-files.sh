@@ -16,4 +16,7 @@ ls
 
 echo "contents of final_files_output are: $(ls final_files_output)"
 
+tar cf final_files_output.tar.gz final_files_output
+
 echo "Done"
+

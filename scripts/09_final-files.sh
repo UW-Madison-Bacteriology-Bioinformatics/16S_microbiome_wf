@@ -14,6 +14,6 @@ biom convert -i final_files_output/feature-table.biom -o final_files_output/otu_
 
 ls 
 
-ls final_files_output
+echo "contents of final_files_output are: $(ls final_files_output)"
 
 echo "Done"
